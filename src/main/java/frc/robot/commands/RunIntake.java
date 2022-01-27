@@ -21,8 +21,8 @@ public class RunIntake extends CommandBase {
     public void execute() {
         double posSpeed, negSpeed;
     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
-        posSpeed = mrTrig2.getAsDouble();
-        negSpeed = -mlTrig2.getAsDouble();
+        posSpeed = -mrTrig2.getAsDouble();
+        negSpeed = mlTrig2.getAsDouble();
 
         if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble())
         {

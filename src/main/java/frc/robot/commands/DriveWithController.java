@@ -10,7 +10,7 @@ public class DriveWithController extends CommandBase{
     private final DoubleSupplier mRightTrigger;
     private final DoubleSupplier mRightStickX;
 
-    public DriveWithController(Drivetrain subsystem, DoubleSupplier leftTrigger, DoubleSupplier rightTrigger, DoubleSupplier rightStickX){
+    public DriveWithController( Drivetrain subsystem, DoubleSupplier leftTrigger, DoubleSupplier rightTrigger, DoubleSupplier rightStickX){
         mDrivetrain = subsystem;
         mLeftTrigger = leftTrigger;
         mRightTrigger = rightTrigger;
