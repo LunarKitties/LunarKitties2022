@@ -8,11 +8,15 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
+//subsystems
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.commands.ExampleCommand;
-
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
+
+//commands
+import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.DriveWithController;
+import frc.robot.commands.RunIntake;
 
 
 /**
@@ -27,6 +31,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final Drivetrain mDrivetrain = new Drivetrain();
+  private final Intake mIntake = new Intake();
 
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
@@ -42,6 +47,14 @@ public class RobotContainer {
         () -> xbox1.getLeftTriggerAxis(), 
         () -> xbox1.getRightTriggerAxis(), 
         () -> xbox1.getRightX()
+      )
+    );
+
+    mIntake.setDefaultCommand(
+      new RunIntake(
+        mIntake,
+        () -> xbox2.getLeftTriggerAxis(),
+        () -> xbox2.getRightTriggerAxis()
       )
     );
 

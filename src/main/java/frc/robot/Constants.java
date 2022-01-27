@@ -14,10 +14,14 @@ package frc.robot;
  */
 public final class Constants {
 
+    //drive motors
     public static int CAN_RF_DRIVE_MOTOR = 7;
     public static int CAN_RM_DRIVE_MOTOR = 5;
     public static int CAN_RB_DRIVE_MOTOR = 6;
     public static int CAN_LF_DRIVE_MOTOR = 4;
     public static int CAN_LM_DRIVE_MOTOR = 3;
     public static int CAN_LB_DRIVE_MOTOR = 2;
+
+    //intake
+    public static int CAN_TALON_INTAKE_MOTOR = 14;
 }
