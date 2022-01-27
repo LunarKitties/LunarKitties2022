@@ -27,7 +27,8 @@ public class DriveWithController extends CommandBase{
         double rotate = -mRightStickX.getAsDouble();
 
         //Drive the Robot
-        mDrivetrain.drive(-speed,rotate);
+       
+            mDrivetrain.drive(speed, rotate);
     }
     
 }

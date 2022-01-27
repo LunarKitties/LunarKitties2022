@@ -22,9 +22,13 @@ public class Drivetrain extends SubsystemBase{
     CANSparkMax rmMotor = new CANSparkMax(Constants.CAN_RM_DRIVE_MOTOR, MotorType.kBrushless);
     CANSparkMax rbMotor = new CANSparkMax(Constants.CAN_RB_DRIVE_MOTOR, MotorType.kBrushless);
 
+   
+    
         //Group the Left and Right Motors together
-    public MotorControllerGroup leftWheels = new MotorControllerGroup(lfMotor, lmMotor, lbMotor);
-    public MotorControllerGroup rightWheels = new MotorControllerGroup(rfMotor, rmMotor, rbMotor);
+   
+        public MotorControllerGroup leftWheels = new MotorControllerGroup(lfMotor, lmMotor, lbMotor);
+        public MotorControllerGroup rightWheels = new MotorControllerGroup(rfMotor, rmMotor, rbMotor);
+    
 
         //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
@@ -38,7 +42,8 @@ public class Drivetrain extends SubsystemBase{
     }
 
     public void drive(double speed, double rotate){
-        dd.arcadeDrive(speed, rotate);
+        leftWheels.setInverted(true);
+        dd.arcadeDrive(speed,rotate);
     }
 
     public void stop(){
