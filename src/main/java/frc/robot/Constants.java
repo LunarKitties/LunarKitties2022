@@ -24,4 +24,8 @@ public final class Constants {
 
     //intake
     public static int CAN_TALON_INTAKE_MOTOR = 14;
+
+    //carriage
+    public static int CAN_TALON_BCARRIAGE_MOTOR = 13;
+    public static int CAN_TALON_TCARRIAGE_MOTOR = 10;
 }
