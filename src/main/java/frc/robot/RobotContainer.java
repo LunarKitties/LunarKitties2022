@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Carriage;
 
 //commands
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.DriveWithController;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.RunCarriage;
 
 
 /**
@@ -32,6 +34,7 @@ public class RobotContainer {
 
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
+  private final Carriage mCarriage = new Carriage();
 
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
@@ -55,6 +58,14 @@ public class RobotContainer {
         mIntake,
         () -> xbox2.getLeftTriggerAxis(),
         () -> xbox2.getRightTriggerAxis()
+      )
+    );
+
+    mCarriage.setDefaultCommand(
+      new RunCarriage(
+        mCarriage,
+        () -> xbox2.getAButton(),
+        ()-> xbox2.getBButton()
       )
     );
 
