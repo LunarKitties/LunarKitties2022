@@ -34,10 +34,11 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     
-    // comp = new Compressor(1, PneumaticsModuleType.REVPH);
-    // comp.enableDigital();
-    // comp.disable();
+    comp = new Compressor(PneumaticsModuleType.REVPH);
+    // comp = new Compressor(1, PneumaticsModuleType.REVPH); //try this if the top one doesnt work. If this doesn't work, set the '1' to '0' and try again. 
+    comp.enableAnalog(80, 120);
 
+          //not sure when or how we would use these yet. 
     // boolean COMPRESSOR_ENABLED = comp.enabled();
     // boolean COMPRESSOR_PRESSURE_SWITCH = comp.getPressureSwitchValue();
     // double COMPRESSOR_CURRENT = comp.getCurrent();
