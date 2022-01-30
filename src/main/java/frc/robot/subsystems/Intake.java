@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 public class Intake extends SubsystemBase{
 
     TalonSRX intakeMotor = new TalonSRX(Constants.CAN_TALON_INTAKE_MOTOR);
+    //TalonSRX carriageLow = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
     
 
     public Intake(){
@@ -17,10 +18,12 @@ public class Intake extends SubsystemBase{
   
     public void runIntake(final double speed){
       intakeMotor.set(ControlMode.PercentOutput, -speed);
+      //carriageLow.set(ControlMode.PercentOutput, speed);
     }
   
     public void stop(){
       intakeMotor.set(ControlMode.PercentOutput, 0);
+      //carriageLow.set(ControlMode.PercentOutput, 0);
     }
   
    

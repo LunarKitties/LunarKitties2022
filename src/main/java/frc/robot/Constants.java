@@ -28,4 +28,9 @@ public final class Constants {
     //carriage
     public static int CAN_TALON_BCARRIAGE_MOTOR = 13;
     public static int CAN_TALON_TCARRIAGE_MOTOR = 10;
+
+    //PCM Ports
+    public static final int PCM_SLIDE_UP = 0;
+    public static final int PCM_SLIDE_DOWN = 1;
 }
+

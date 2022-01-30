@@ -55,6 +55,7 @@ public class RobotContainer {
 
     mIntake.setDefaultCommand(
       new RunIntake(
+       // mCarriage,
         mIntake,
         () -> xbox2.getLeftTriggerAxis(),
         () -> xbox2.getRightTriggerAxis()
@@ -67,7 +68,9 @@ public class RobotContainer {
         () -> xbox2.getAButton(),
         ()-> xbox2.getBButton()
       )
-    );
+      );
+
+    
 
   }
 

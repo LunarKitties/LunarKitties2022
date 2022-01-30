@@ -34,13 +34,20 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     
-    // comp = new Compressor(1, PneumaticsModuleType.REVPH);
-    // comp.enableDigital();
-    // comp.disable();
+    /*comp = new Compressor(1, PneumaticsModuleType.REVPH);
+    comp.enableAnalog(0.0, 120.0);
+    comp.disable();
 
-    // boolean COMPRESSOR_ENABLED = comp.enabled();
-    // boolean COMPRESSOR_PRESSURE_SWITCH = comp.getPressureSwitchValue();
-    // double COMPRESSOR_CURRENT = comp.getCurrent();
+    boolean COMPRESSOR_ENABLED = comp.enabled();
+    boolean COMPRESSOR_PRESSURE_SWITCH = comp.getPressureSwitchValue();
+    double COMPRESSOR_CURRENT = comp.getCurrent(); */
+    Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
+    phCompressor.enableAnalog(0.0, 120.0);
+    //phCompressor.disable();
+
+    boolean enabled = phCompressor.enabled();
+    boolean pressureSwitch = phCompressor.getPressureSwitchValue();
+    //double current = phCompressor.getCompressorCurrent();
   }
 
   /**
@@ -57,6 +64,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
