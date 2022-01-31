@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -22,7 +23,6 @@ public class Drivetrain extends SubsystemBase{
     CANSparkMax rmMotor = new CANSparkMax(Constants.CAN_RM_DRIVE_MOTOR, MotorType.kBrushless);
     CANSparkMax rbMotor = new CANSparkMax(Constants.CAN_RB_DRIVE_MOTOR, MotorType.kBrushless);
 
-   
     
         //Group the Left and Right Motors together
    
@@ -34,7 +34,7 @@ public class Drivetrain extends SubsystemBase{
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
 
       //Wheel Shifters
-    //DoubleSolenoid shifters = new DoubleSolenoid(Constants.PCM_DRIVE_S_IN, Constants.PCM_DRIVE_S_OUT);
+    DoubleSolenoid shifters = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
 
         //constructor
     public Drivetrain(){
@@ -50,19 +50,19 @@ public class Drivetrain extends SubsystemBase{
         dd.stopMotor();
     }
 
-    // public void shiftHigh(){
-    //     shifters.set(Value.kForward);
-    // }
+    public void shiftHigh(){
+        shifters.set(Value.kForward);
+    }
 
-    // public void shiftLow(){
-    //     shifters.set(Value.kReverse);
-    // }
+     public void shiftLow(){
+        shifters.set(Value.kReverse);
+    }
 
-    // public boolean isHighGear(){
-    //     return shifters.get() == Value.kForward;
-    // }
+    public boolean isHighGear(){
+        return shifters.get() == Value.kForward;
+    }
 
-    // public boolean isLowGear(){
-    //     return shifters.get() == Value.kReverse;
-    // }
+    public boolean isLowGear(){
+        return shifters.get() == Value.kReverse;
+    }
 }
