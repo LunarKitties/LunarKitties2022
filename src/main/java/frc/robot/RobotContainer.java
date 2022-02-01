@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -44,6 +45,7 @@ public class RobotContainer {
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
   private final Carriage mCarriage = new Carriage();
+  
 
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
@@ -61,6 +63,7 @@ public class RobotContainer {
         () -> xbox1.getRightX()
       )
     );
+
 
     mIntake.setDefaultCommand(
       new RunIntake(
@@ -90,9 +93,6 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     
-    
-    new JoystickButton(xbox1, Button.kX.value).whenPressed(new RunCarriage(mCarriage));
-    new JoystickButton(xbox1, Button.kB.value).whenPressed(new StopCarriage(mCarriage));
     
     new JoystickButton(xbox1, Button.kRightBumper.value).whenPressed(new WheelsShiftHigh(mDrivetrain));
     new JoystickButton(xbox1, Button.kLeftBumper.value).whenPressed(new WheelsShiftLow(mDrivetrain));

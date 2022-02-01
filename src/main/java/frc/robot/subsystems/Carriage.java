@@ -34,5 +34,9 @@ public class Carriage extends SubsystemBase{
    public void liftDown(){
       lift.set(Value.kReverse);
   }
+
+  public boolean liftIsUp(){
+    return lift.get() == Value.kForward;
+  }
   
 }
