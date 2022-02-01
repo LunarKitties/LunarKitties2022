@@ -20,8 +20,13 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.DriveWithController;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunCarriage;
+import frc.robot.commands.StopCarriage;
 import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
+import frc.robot.commands.CarriageUp;
+import frc.robot.commands.CarriageDown;
+import frc.robot.commands.IntakeUp;
+import frc.robot.commands.IntakeDown;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
@@ -59,21 +64,20 @@ public class RobotContainer {
 
     mIntake.setDefaultCommand(
       new RunIntake(
-        //mCarriage,
+        mCarriage,
         mIntake,
         () -> xbox2.getLeftTriggerAxis(),
         () -> xbox2.getRightTriggerAxis()
       )
     );
-
+/*
     mCarriage.setDefaultCommand(
       new RunCarriage(
         mCarriage,
-        () -> xbox2.getAButton(),
-        ()-> xbox2.getBButton()
+        () -> xbox1.getXButton()
       )
       );
-
+*/
     
 
   }
@@ -85,8 +89,19 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
+    
+    new JoystickButton(xbox1, Button.kX.value).whenPressed(new RunCarriage(mCarriage));
+    new JoystickButton(xbox1, Button.kB.value).whenPressed(new StopCarriage(mCarriage));
+    
     new JoystickButton(xbox1, Button.kRightBumper.value).whenPressed(new WheelsShiftHigh(mDrivetrain));
     new JoystickButton(xbox1, Button.kLeftBumper.value).whenPressed(new WheelsShiftLow(mDrivetrain));
+
+    new JoystickButton(xbox2, Button.kY.value).whenPressed(new IntakeUp(mIntake));
+    new JoystickButton(xbox2, Button.kX.value).whenPressed(new IntakeDown(mIntake));
+
+    new JoystickButton(xbox1, Button.kY.value).whenPressed(new CarriageUp(mCarriage));
+    new JoystickButton(xbox1, Button.kA.value).whenPressed(new CarriageDown(mCarriage));
   }
 
   /**

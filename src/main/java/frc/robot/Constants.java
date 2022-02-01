@@ -32,5 +32,9 @@ public final class Constants {
     //PH Ports
     public static final int PH_DRIVE_S_OUT = 2;
     public static final int PH_DRIVE_S_IN = 3;
+    public static final int PH_INTAKE_UP = 4;
+    public static final int PH_INTAKE_DOWN = 5;
+    public static final int PH_CARRIAGE_UP = 0;
+    public static final int PH_CARRIAGE_DOWN = 1;
 }
 

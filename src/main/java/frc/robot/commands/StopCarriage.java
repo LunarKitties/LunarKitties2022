@@ -6,18 +6,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.Carriage;
 
-public class RunCarriage extends CommandBase {
+public class StopCarriage extends CommandBase {
    
     private final Carriage mCarriage;
     
-   public RunCarriage(Carriage Subsystem)
+   public StopCarriage(Carriage Subsystem)
     {
         mCarriage = Subsystem;
         addRequirements(mCarriage);
     }
     @Override
     public void initialize() {
-        mCarriage.runCarriage(1);
+        mCarriage.runCarriage(0);
     }  
 
     public boolean isFinished()
