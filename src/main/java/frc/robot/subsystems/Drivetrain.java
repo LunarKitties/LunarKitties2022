@@ -22,23 +22,21 @@ public class Drivetrain extends SubsystemBase{
     CANSparkMax rfMotor = new CANSparkMax(Constants.CAN_RF_DRIVE_MOTOR, MotorType.kBrushless);
     CANSparkMax rmMotor = new CANSparkMax(Constants.CAN_RM_DRIVE_MOTOR, MotorType.kBrushless);
     CANSparkMax rbMotor = new CANSparkMax(Constants.CAN_RB_DRIVE_MOTOR, MotorType.kBrushless);
-
     
         //Group the Left and Right Motors together
-   
-        public MotorControllerGroup leftWheels = new MotorControllerGroup(lfMotor, lmMotor, lbMotor);
-        public MotorControllerGroup rightWheels = new MotorControllerGroup(rfMotor, rmMotor, rbMotor);
-    
+    public MotorControllerGroup leftWheels = new MotorControllerGroup(lfMotor, lmMotor, lbMotor);
+    public MotorControllerGroup rightWheels = new MotorControllerGroup(rfMotor, rmMotor, rbMotor);
 
         //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
 
       //Wheel Shifters
-    DoubleSolenoid shifters = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
+    DoubleSolenoid shifters = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_DRIVE_S_OUT, Constants.PH_DRIVE_S_IN);
 
         //constructor
     public Drivetrain(){
         dd.setSafetyEnabled(false);
+        shifters.set(Value.kReverse);
     }
 
     public void drive(double speed, double rotate){
@@ -52,6 +50,7 @@ public class Drivetrain extends SubsystemBase{
 
     public void shiftHigh(){
         shifters.set(Value.kForward);
+        //shifters.toggle();
     }
 
      public void shiftLow(){

@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 
 //subsystems
@@ -19,6 +20,9 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.DriveWithController;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunCarriage;
+import frc.robot.commands.WheelsShiftHigh;
+import frc.robot.commands.WheelsShiftLow;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 /**
@@ -55,7 +59,7 @@ public class RobotContainer {
 
     mIntake.setDefaultCommand(
       new RunIntake(
-       // mCarriage,
+        //mCarriage,
         mIntake,
         () -> xbox2.getLeftTriggerAxis(),
         () -> xbox2.getRightTriggerAxis()
@@ -80,7 +84,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    new JoystickButton(xbox1, Button.kRightBumper.value).whenPressed(new WheelsShiftHigh(mDrivetrain));
+    new JoystickButton(xbox1, Button.kLeftBumper.value).whenPressed(new WheelsShiftLow(mDrivetrain));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
