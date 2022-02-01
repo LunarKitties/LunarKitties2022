@@ -13,6 +13,7 @@ public class Intake extends SubsystemBase{
 
     TalonSRX intakeMotor = new TalonSRX(Constants.CAN_TALON_INTAKE_MOTOR);
     TalonSRX carriageLow = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
+    TalonSRX carriageUp = new TalonSRX(Constants.CAN_TALON_TCARRIAGE_MOTOR);
     
     DoubleSolenoid IntakeJoint = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_INTAKE_UP, Constants.PH_INTAKE_DOWN);
 
@@ -22,6 +23,12 @@ public class Intake extends SubsystemBase{
     public void runIntake(final double speed){
       intakeMotor.set(ControlMode.PercentOutput, -speed);
       carriageLow.set(ControlMode.PercentOutput, speed);
+    }
+    
+    public void runCarriage(final double speed) 
+    {
+      carriageLow.set(ControlMode.PercentOutput, -speed);
+      carriageUp.set(ControlMode.PercentOutput, -speed);
     }
   
     public void stop(){
