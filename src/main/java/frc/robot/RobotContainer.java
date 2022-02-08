@@ -52,6 +52,7 @@ public class RobotContainer {
   private final Intake mIntake = new Intake();
   private final Carriage mCarriage = new Carriage();
 
+  //private ComplexAut0 auto = new ComplexAuto(mDrivetrain, mCarriage);
   private SequentialCommandGroup autoStart = new SequentialCommandGroup(
       new DriveAuto(mDrivetrain, -0.5),
       new RunCarriageAuto(mCarriage, 1),
