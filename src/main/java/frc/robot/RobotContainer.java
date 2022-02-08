@@ -18,6 +18,7 @@ import frc.robot.subsystems.Carriage;
 
 //commands
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.TestAutoCommand;
 import frc.robot.commands.DriveWithController;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunCarriage;
@@ -39,13 +40,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  
 
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
   private final Carriage mCarriage = new Carriage();
   
+  private final TestAutoCommand m_autoCommand = new TestAutoCommand(mDrivetrain);
 
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
@@ -100,8 +103,8 @@ public class RobotContainer {
     new JoystickButton(xbox2, Button.kY.value).whenPressed(new IntakeUp(mIntake));
     new JoystickButton(xbox2, Button.kX.value).whenPressed(new IntakeDown(mIntake));
 
-    new JoystickButton(xbox1, Button.kY.value).whenPressed(new CarriageUp(mCarriage));
-    new JoystickButton(xbox1, Button.kA.value).whenPressed(new CarriageDown(mCarriage));
+    new JoystickButton(xbox2, Button.kY.value).whenPressed(new CarriageUp(mCarriage));
+    new JoystickButton(xbox2, Button.kA.value).whenPressed(new CarriageDown(mCarriage));
   }
 
   /**

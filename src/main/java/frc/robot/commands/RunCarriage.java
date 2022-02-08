@@ -17,7 +17,7 @@ public class RunCarriage extends CommandBase {
     }
     @Override
     public void initialize() {
-        mCarriage.runCarriage(1);
+        mCarriage.runCarriage(-1);
     }  
 
     public boolean isFinished()

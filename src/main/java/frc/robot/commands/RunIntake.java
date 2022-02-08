@@ -20,7 +20,6 @@ public class RunIntake extends CommandBase {
         mlTrig2 = lTrig2;
         mCarriage = Subsystem1;
         mIntake = Subsystem;
-        
 
         addRequirements(mCarriage);
         addRequirements(mIntake);
@@ -44,11 +43,10 @@ public class RunIntake extends CommandBase {
         {
             if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble()){
             mIntake.runIntake(posSpeed);
-        }
-        else{
+            }
+            else{
             mIntake.runIntake(negSpeed);
-        }
-            
+             }
         }
       
     }  
