@@ -7,10 +7,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Carriage extends SubsystemBase{
     TalonSRX bCarriage = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
     TalonSRX tCarriage = new TalonSRX(Constants.CAN_TALON_TCARRIAGE_MOTOR);
+    DigitalInput carriageSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_SWITCH);
     
     DoubleSolenoid lift = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_CARRIAGE_UP, Constants.PH_CARRIAGE_DOWN);
 
@@ -38,5 +40,11 @@ public class Carriage extends SubsystemBase{
   public boolean liftIsUp(){
     return lift.get() == Value.kForward;
   }
+
+  public boolean limitSwitchState(){
+    return carriageSwitch.get();
+  }
+
+  
   
 }

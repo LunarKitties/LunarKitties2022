@@ -21,7 +21,15 @@ public class CarriageDown extends CommandBase {
     }
 
     @Override
-    public boolean isFinished(){
+    public boolean isFinished(){ 
+        if(!mCarriage.limitSwitchState()){
         return true;
+        }
+        return false;
+    }
+
+    public void end()
+    {
+
     }
 }

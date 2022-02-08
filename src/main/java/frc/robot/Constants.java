@@ -36,5 +36,8 @@ public final class Constants {
     public static final int PH_INTAKE_DOWN = 5;
     public static final int PH_CARRIAGE_UP = 0;
     public static final int PH_CARRIAGE_DOWN = 1;
+
+    //digital imput ports
+    public static final int CARRIAGE_LIFT_SWITCH = 0;
 }
 

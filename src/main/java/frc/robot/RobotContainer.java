@@ -15,10 +15,12 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Carriage;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 //commands
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TestAutoCommand;
+import frc.robot.commands.TestAutoCommand2;
 import frc.robot.commands.DriveWithController;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunCarriage;
@@ -47,8 +49,13 @@ public class RobotContainer {
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
   private final Carriage mCarriage = new Carriage();
+
+  private SequentialCommandGroup autoStart = new SequentialCommandGroup(
+      new TestAutoCommand(mDrivetrain),
+      new TestAutoCommand2(mDrivetrain),
+      new CarriageUp(mCarriage)
+     );
   
-  private final TestAutoCommand m_autoCommand = new TestAutoCommand(mDrivetrain);
 
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
@@ -114,6 +121,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return autoStart;
   }
 }
