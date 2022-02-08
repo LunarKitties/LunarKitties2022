@@ -19,11 +19,13 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 //commands
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.TestAutoCommand;
-import frc.robot.commands.TestAutoCommand2;
 import frc.robot.commands.DriveWithController;
+import frc.robot.commands.DriveAuto;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunCarriage;
+import frc.robot.commands.CarriageUpAuto;
+import frc.robot.commands.CarriageDownAuto;
+import frc.robot.commands.RunCarriageAuto;
 import frc.robot.commands.StopCarriage;
 import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
@@ -51,9 +53,10 @@ public class RobotContainer {
   private final Carriage mCarriage = new Carriage();
 
   private SequentialCommandGroup autoStart = new SequentialCommandGroup(
-      new TestAutoCommand(mDrivetrain),
-      new TestAutoCommand2(mDrivetrain),
-      new CarriageUp(mCarriage)
+      new DriveAuto(mDrivetrain, -0.5),
+      new RunCarriageAuto(mCarriage, 1),
+      new DriveAuto(mDrivetrain, 0),
+      new DriveAuto(mDrivetrain, 0.5)
      );
   
 

@@ -4,15 +4,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Timer;
 
-public class TestAutoCommand extends CommandBase{
+public class DriveAuto extends CommandBase{
 
     private final Drivetrain mDrivetrain;
+    private final double speed;
     private final Timer time = new Timer();
     // private double
 
-    public TestAutoCommand(Drivetrain subsystem)
+    public DriveAuto(Drivetrain subsystem,double s)
     {
         mDrivetrain = subsystem;
+        speed = s;
         addRequirements(mDrivetrain);
     }
 
@@ -23,12 +25,12 @@ public class TestAutoCommand extends CommandBase{
 
     public void execute()
     {
-        mDrivetrain.drive(1, 0);
+        mDrivetrain.drive(speed, 0);
     }
 
     public boolean isFinished()
     {
-        if(time.get() > 1)
+        if(time.get() > 2)
         {
             mDrivetrain.drive(0, 0);
             return true;
