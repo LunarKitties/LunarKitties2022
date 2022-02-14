@@ -8,29 +8,24 @@ import edu.wpi.first.wpilibj.Timer;
 public class CarriageDownAuto extends CommandBase {
     private final Carriage mCarriage;
     private final Timer time = new Timer();
-    private boolean done = false;
     //private final LEDs mLEDs;
 
     public CarriageDownAuto(Carriage _Carriage){
         mCarriage = _Carriage;
-        
         //mLEDs = _LEDs;
         addRequirements(mCarriage);
     }
 
-    @Override
     public void initialize(){
         time.start();
-        mCarriage.liftDown();
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
 
-
-    @Override
     public boolean isFinished(){
-        if(time.get() < 2){
+        if(time.get() > 2){
             return true;
             }
+            mCarriage.liftDown();
            return false;
     }
     

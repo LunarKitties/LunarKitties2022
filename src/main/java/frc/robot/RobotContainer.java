@@ -15,26 +15,29 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Carriage;
+import frc.robot.subsystems.WheelOfFortune;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 //commands
-import frc.robot.commands.ExampleCommand;
+//import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.DriveWithController;
-import frc.robot.commands.DriveAuto;
 import frc.robot.commands.RunIntake;
-import frc.robot.commands.RunCarriage;
-import frc.robot.commands.CarriageUpAuto;
-import frc.robot.commands.CarriageDownAuto;
-import frc.robot.commands.RunCarriageAuto;
-import frc.robot.commands.StopCarriage;
+import frc.robot.commands.StopWheel;
 import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
 import frc.robot.commands.CarriageUp;
 import frc.robot.commands.CarriageDown;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.IntakeDown;
+import frc.robot.commands.RunWheel;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import frc.robot.commands.DriveAuto;
+ import frc.robot.commands.RunCarriage;
+ import frc.robot.commands.CarriageUpAuto;
+ import frc.robot.commands.CarriageDownAuto;
+ import frc.robot.commands.RunCarriageAuto;
+ import frc.robot.commands.StopCarriage;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -51,16 +54,17 @@ public class RobotContainer {
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
   private final Carriage mCarriage = new Carriage();
+  private final WheelOfFortune mWheel = new WheelOfFortune();
 
-  //private ComplexAut0 auto = new ComplexAuto(mDrivetrain, mCarriage);
-  private SequentialCommandGroup autoStart = new SequentialCommandGroup(
-      new DriveAuto(mDrivetrain, -0.5),
-      new RunCarriageAuto(mCarriage, 1),
-      new DriveAuto(mDrivetrain, 0),
-      new DriveAuto(mDrivetrain, 0.5)
-     );
-  
+  // private final DriveAuto step1 = new DriveAuto(mDrivetrain, 0.5);
+  // private final DriveAuto step2 = new DriveAuto(mDrivetrain, 0);
+  // private final DriveAuto step3 = new DriveAuto(mDrivetrain, -0.5);
+  private final DriveAuto step1 = new DriveAuto(mDrivetrain, -0.5);
+  private final CarriageUpAuto step2 = new CarriageUpAuto(mCarriage);
+  private final CarriageDownAuto step3 = new CarriageDownAuto(mCarriage);
 
+
+   private SequentialCommandGroup autoStart = new SequentialCommandGroup();
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
 
@@ -87,15 +91,6 @@ public class RobotContainer {
         () -> xbox2.getRightTriggerAxis()
       )
     );
-/*
-    mCarriage.setDefaultCommand(
-      new RunCarriage(
-        mCarriage,
-        () -> xbox1.getXButton()
-      )
-      );
-*/
-    
 
   }
 
@@ -111,8 +106,12 @@ public class RobotContainer {
     new JoystickButton(xbox1, Button.kRightBumper.value).whenPressed(new WheelsShiftHigh(mDrivetrain));
     new JoystickButton(xbox1, Button.kLeftBumper.value).whenPressed(new WheelsShiftLow(mDrivetrain));
 
-    new JoystickButton(xbox2, Button.kY.value).whenPressed(new IntakeUp(mIntake));
-    new JoystickButton(xbox2, Button.kX.value).whenPressed(new IntakeDown(mIntake));
+    new JoystickButton(xbox2, Button.kLeftBumper.value).whenPressed(new RunWheel(mWheel, 0.5));
+    new JoystickButton(xbox2, Button.kRightBumper.value).whenPressed(new RunWheel(mWheel, - 0.5));
+    new JoystickButton(xbox2, Button.kX.value).whenPressed(new StopWheel(mWheel));
+
+    new JoystickButton(xbox1, Button.kY.value).whenPressed(new IntakeUp(mIntake));
+    new JoystickButton(xbox1, Button.kX.value).whenPressed(new IntakeDown(mIntake));
 
     new JoystickButton(xbox2, Button.kY.value).whenPressed(new CarriageUp(mCarriage));
     new JoystickButton(xbox2, Button.kA.value).whenPressed(new CarriageDown(mCarriage));
@@ -125,6 +124,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+    autoStart.addCommands(step1, step2);
     return autoStart;
+    //return auto;
   }
 }

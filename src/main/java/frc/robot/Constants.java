@@ -14,6 +14,11 @@ package frc.robot;
  */
 public final class Constants {
 
+    //wheel of fortune
+    //monkey bars
+    public static int CAN_LEFT_WHEEL = 8;
+    public static int CAN_RIGHT_WHEEL = 9;
+
     //drive motors
     public static int CAN_RF_DRIVE_MOTOR = 7;
     public static int CAN_RM_DRIVE_MOTOR = 5;

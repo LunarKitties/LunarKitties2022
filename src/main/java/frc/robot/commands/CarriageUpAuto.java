@@ -16,13 +16,11 @@ public class CarriageUpAuto extends CommandBase {
         addRequirements(mCarriage);
     }
 
-    @Override
     public void initialize(){
         mCarriage.liftUp();
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
 
-    @Override
     public boolean isFinished(){
         if(time.get() > 2){
         return true;

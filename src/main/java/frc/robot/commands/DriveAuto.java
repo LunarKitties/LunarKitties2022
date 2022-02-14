@@ -11,7 +11,7 @@ public class DriveAuto extends CommandBase{
     private final Timer time = new Timer();
     // private double
 
-    public DriveAuto(Drivetrain subsystem,double s)
+    public DriveAuto(Drivetrain subsystem, double s)
     {
         mDrivetrain = subsystem;
         speed = s;

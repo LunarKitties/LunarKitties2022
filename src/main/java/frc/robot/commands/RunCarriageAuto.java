@@ -8,30 +8,25 @@ import edu.wpi.first.wpilibj.Timer;
 public class RunCarriageAuto extends CommandBase {
     private final Carriage mCarriage;
     private final Timer time = new Timer();
-    private final double speed;
+    private final double mSpeed;
     //private final LEDs mLEDs;
 
     public RunCarriageAuto(Carriage _Carriage, double s){
         mCarriage = _Carriage;
-        speed = s;
+        mSpeed = s;
         //mLEDs = _LEDs;
         addRequirements(mCarriage);
     }
 
-    @Override
     public void initialize(){
         time.start();
+        mCarriage.runCarriage(mSpeed);
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
-
-    public void execute()
-    {
-        mCarriage.runCarriage(speed);
-    }
-
-    @Override
-    public boolean isFinished(){
+    
+   public boolean isFinished(){
         if(time.get() > 2){
+        mCarriage.runCarriage(0);
         return true;
         }
         return false;
