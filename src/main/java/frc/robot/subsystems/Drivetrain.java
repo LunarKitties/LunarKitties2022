@@ -59,7 +59,7 @@ public class Drivetrain extends SubsystemBase{
 
     public void arDrive(double speed, double rotate){
         leftWheels.setInverted(true);
-        dd.arcadeDrive(speed ,rotate*1);
+        dd.arcadeDrive(speed ,rotate*0.7);
     }
 
     public void tDrive(double left, double right)

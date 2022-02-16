@@ -98,8 +98,8 @@ public class RobotContainer {
       new RunIntake(
         mCarriage,
         mIntake,
-        () -> xbox2.getLeftTriggerAxis(),
-        () -> xbox2.getRightTriggerAxis()
+        () -> xbox1.getLeftTriggerAxis(),
+        () -> xbox1.getRightTriggerAxis()
       )
     );
 
