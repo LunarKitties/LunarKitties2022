@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import java.util.function.IntSupplier;
 
 import frc.robot.Constants;
 
@@ -22,10 +23,13 @@ public class Drivetrain extends SubsystemBase{
     CANSparkMax rfMotor = new CANSparkMax(Constants.CAN_RF_DRIVE_MOTOR, MotorType.kBrushless);
     CANSparkMax rmMotor = new CANSparkMax(Constants.CAN_RM_DRIVE_MOTOR, MotorType.kBrushless);
     CANSparkMax rbMotor = new CANSparkMax(Constants.CAN_RB_DRIVE_MOTOR, MotorType.kBrushless);
+
+    private int config = 2;
     
         //Group the Left and Right Motors together
     public MotorControllerGroup leftWheels = new MotorControllerGroup(lfMotor, lmMotor, lbMotor);
     public MotorControllerGroup rightWheels = new MotorControllerGroup(rfMotor, rmMotor, rbMotor);
+
 
         //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
@@ -39,9 +43,29 @@ public class Drivetrain extends SubsystemBase{
         shifters.set(Value.kReverse);
     }
 
-    public void drive(double speed, double rotate){
+    public void changeConfig()
+    {
+        config++;
+        if(config > 3)
+        {
+            config = 1;
+        }
+    }
+
+    public int getConfig()
+    {
+        return config;
+    }
+
+    public void arDrive(double speed, double rotate){
         leftWheels.setInverted(true);
-        dd.arcadeDrive(speed,rotate);
+        dd.arcadeDrive(speed ,rotate*1);
+    }
+
+    public void tDrive(double left, double right)
+    {
+        leftWheels.setInverted(true);
+        dd.tankDrive(left, right);
     }
 
     public void stop(){

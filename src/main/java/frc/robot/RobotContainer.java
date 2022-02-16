@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
+//array list
+import java.util.ArrayList;
 
 //subsystems
 import frc.robot.subsystems.ExampleSubsystem;
@@ -35,7 +37,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveAuto;
  import frc.robot.commands.RunCarriage;
  import frc.robot.commands.CarriageUpAuto;
- import frc.robot.commands.CarriageDownAuto;
+import frc.robot.commands.ChangeConfig;
+import frc.robot.commands.CarriageDownAuto;
  import frc.robot.commands.RunCarriageAuto;
  import frc.robot.commands.StopCarriage;
 
@@ -49,22 +52,28 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  
 
+  
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
   private final Carriage mCarriage = new Carriage();
   private final WheelOfFortune mWheel = new WheelOfFortune();
 
+  private final DriveAuto step1 = new DriveAuto(mDrivetrain, -0.5);
+  
+  private boolean ar = false;
+  private boolean t = true;
+  private boolean altAr = true;
   // private final DriveAuto step1 = new DriveAuto(mDrivetrain, 0.5);
   // private final DriveAuto step2 = new DriveAuto(mDrivetrain, 0);
   // private final DriveAuto step3 = new DriveAuto(mDrivetrain, -0.5);
-  private final DriveAuto step1 = new DriveAuto(mDrivetrain, -0.5);
+ 
   private final CarriageUpAuto step2 = new CarriageUpAuto(mCarriage);
   private final CarriageDownAuto step3 = new CarriageDownAuto(mCarriage);
 
 
-   private SequentialCommandGroup autoStart = new SequentialCommandGroup();
+
+  private SequentialCommandGroup autoStart = new SequentialCommandGroup();
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
 
@@ -78,10 +87,12 @@ public class RobotContainer {
         mDrivetrain, 
         () -> xbox1.getLeftTriggerAxis(), 
         () -> xbox1.getRightTriggerAxis(), 
-        () -> xbox1.getRightX()
+        () -> xbox1.getRightX(),
+        () -> xbox1.getLeftY(),
+        () -> xbox1.getRightY(),
+        mDrivetrain.getConfig()
       )
     );
-
 
     mIntake.setDefaultCommand(
       new RunIntake(
@@ -89,6 +100,13 @@ public class RobotContainer {
         mIntake,
         () -> xbox2.getLeftTriggerAxis(),
         () -> xbox2.getRightTriggerAxis()
+      )
+    );
+
+    mWheel.setDefaultCommand(
+      new RunWheel(
+        mWheel, 
+        () -> xbox2.getLeftY()
       )
     );
 
@@ -106,9 +124,8 @@ public class RobotContainer {
     new JoystickButton(xbox1, Button.kRightBumper.value).whenPressed(new WheelsShiftHigh(mDrivetrain));
     new JoystickButton(xbox1, Button.kLeftBumper.value).whenPressed(new WheelsShiftLow(mDrivetrain));
 
-    new JoystickButton(xbox2, Button.kLeftBumper.value).whenPressed(new RunWheel(mWheel, 0.5));
-    new JoystickButton(xbox2, Button.kRightBumper.value).whenPressed(new RunWheel(mWheel, - 0.5));
-    new JoystickButton(xbox2, Button.kX.value).whenPressed(new StopWheel(mWheel));
+    //new JoystickButton(xbox2, Button.kX.value).whenPressed(new StopWheel(mWheel));
+    new JoystickButton(xbox1, Button.kB.value).whenPressed(new ChangeConfig(mDrivetrain));
 
     new JoystickButton(xbox1, Button.kY.value).whenPressed(new IntakeUp(mIntake));
     new JoystickButton(xbox1, Button.kX.value).whenPressed(new IntakeDown(mIntake));
@@ -124,7 +141,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    autoStart.addCommands(step1, step2);
+    autoStart.addCommands(new DriveAuto(mDrivetrain, 0.5), new DriveAuto(mDrivetrain, 0));
     return autoStart;
     //return auto;
   }

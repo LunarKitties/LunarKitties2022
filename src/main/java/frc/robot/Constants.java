@@ -28,11 +28,12 @@ public final class Constants {
     public static int CAN_LB_DRIVE_MOTOR = 2;
 
     //intake
-    public static int CAN_TALON_INTAKE_MOTOR = 14;
+    public static int CAN_INTAKE_MOTOR = 16;
 
     //carriage
     public static int CAN_TALON_BCARRIAGE_MOTOR = 13;
     public static int CAN_TALON_TCARRIAGE_MOTOR = 10;
+    public static int CAN_TALON_SHOOTER_MOTOR = 14;
 
     //PH Ports
     public static final int PH_DRIVE_S_OUT = 2;

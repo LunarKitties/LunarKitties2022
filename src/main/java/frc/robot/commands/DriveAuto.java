@@ -25,14 +25,14 @@ public class DriveAuto extends CommandBase{
 
     public void execute()
     {
-        mDrivetrain.drive(speed, 0);
+        mDrivetrain.arDrive(speed, 0);
     }
 
     public boolean isFinished()
     {
         if(time.get() > 2)
         {
-            mDrivetrain.drive(0, 0);
+            mDrivetrain.arDrive(0, 0);
             return true;
         }
         return false;
@@ -40,7 +40,7 @@ public class DriveAuto extends CommandBase{
  
     public void end()
     {
-        mDrivetrain.drive(0, 0);
+        mDrivetrain.arDrive(0, 0);
     }
     
 }

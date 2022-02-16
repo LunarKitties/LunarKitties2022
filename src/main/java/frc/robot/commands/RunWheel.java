@@ -3,22 +3,23 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.WheelOfFortune;
+import java.util.function.DoubleSupplier;
 //import frc.robot.subsystems.LEDs;
 
 public class RunWheel extends CommandBase {
     private final WheelOfFortune mWheel;
-    private double speed;
+    private final DoubleSupplier mLeftStickY;
     //private final LEDs mLEDs;
 
-    public RunWheel(WheelOfFortune _wheel, double s){
+    public RunWheel(WheelOfFortune _wheel, DoubleSupplier LeftStickY){
         mWheel = _wheel;
-        speed = s;
+        mLeftStickY = LeftStickY;
         addRequirements(mWheel);
     }
 
     @Override
-    public  void initialize(){
-        mWheel.climb(speed);
+    public  void execute(){
+        mWheel.climb(mLeftStickY.getAsDouble());
     }
 
 }
