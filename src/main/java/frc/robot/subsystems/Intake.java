@@ -10,6 +10,12 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.I2C;
+
+import com.revrobotics.ColorSensorV3;
+
 
 public class Intake extends SubsystemBase{
 
@@ -20,21 +26,24 @@ public class Intake extends SubsystemBase{
     
     DoubleSolenoid IntakeJoint = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_INTAKE_UP, Constants.PH_INTAKE_DOWN);
 
+    private final I2C.Port i2cPort = I2C.Port.kOnboard;
+    private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+
     public Intake(){
     }
   
     public void runIntake(final double speed){
       intakeMotor.set(speed);
       carriageLow.set(ControlMode.PercentOutput, speed);
-      carriageUp.set(ControlMode.PercentOutput, -speed);
+      if(colorSeesRed() || colorSeesBlue())
+      {
+      carriageUp.set(ControlMode.PercentOutput, 0);
+      }
+      else{
+        carriageUp.set(ControlMode.PercentOutput, speed);
+      }
     }
     
-    public void runCarriage(final double speed) 
-    {
-      carriageLow.set(ControlMode.PercentOutput, -speed);
-      carriageUp.set(ControlMode.PercentOutput, -speed);
-      carriageShooter.set(ControlMode.PercentOutput, -speed);
-    }
   
     public void stop(){
       intakeMotor.set(0);
@@ -49,6 +58,34 @@ public class Intake extends SubsystemBase{
 
    public void IntakeDown(){
       IntakeJoint.set(Value.kReverse);
+    }
+
+    public int getRed(){
+      return m_colorSensor.getRed();
+    }
+  
+    public int getBlue(){
+      return m_colorSensor.getBlue();
+    }
+  
+    public boolean colorSeesRed(){
+      if(m_colorSensor.getRed() > 500)
+      {
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
+    public boolean colorSeesBlue(){
+      if(m_colorSensor.getBlue() > 50000000)
+      {
+        return true;
+      }
+      else{
+        return false;
+      }
     }
   
 }
