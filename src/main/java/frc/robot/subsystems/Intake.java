@@ -44,6 +44,11 @@ public class Intake extends SubsystemBase{
       }
     }
     
+    public void shootIntake(final double speed){
+      carriageLow.set(ControlMode.PercentOutput, speed);
+      carriageUp.set(ControlMode.PercentOutput, speed);
+      intakeMotor.set(0);
+    }
   
     public void stop(){
       intakeMotor.set(0);

@@ -23,9 +23,9 @@ public class CarriageUp extends CommandBase {
     @Override
     public boolean isFinished(){
         if(mCarriage.limitSwitchState()){
-        return true;
+            return true;
         }
-        return false;
+            return false;
     }
 
     public void end()

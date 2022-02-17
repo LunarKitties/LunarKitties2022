@@ -5,12 +5,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
-// blake likes ketchup
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -24,6 +27,9 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private Compressor comp;
 
+  private HttpCamera limelightFeed;
+  ShuffleboardTab streams = Shuffleboard.getTab("streams");
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -34,15 +40,11 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     
-    // comp = new Compressor(1, PneumaticsModuleType.REVPH);
     comp = new Compressor(15, PneumaticsModuleType.REVPH);
-    // comp.enableAnalog(80, 120);
     comp.enableDigital();
 
-          //not sure when or how we would use these yet. 
-    // boolean COMPRESSOR_ENABLED = comp.enabled();
-    // boolean COMPRESSOR_PRESSURE_SWITCH = comp.getPressureSwitchValue();
-    // double COMPRESSOR_CURRENT = comp.getCurrent();
+    limelightFeed = new HttpCamera("limelight", "http://10.59.30.11:5800/stream.mjpg");
+    streams.add("limelight", limelightFeed).withPosition(0, 0).withSize(15, 8);
   }
 
   /**

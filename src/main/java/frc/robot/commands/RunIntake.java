@@ -29,23 +29,23 @@ public class RunIntake extends CommandBase {
     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
         posSpeed = -mrTrig2.getAsDouble();
         negSpeed = mlTrig2.getAsDouble();
-
+        
         if(mCarriage.liftIsUp()){
             if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble()){
-             mCarriage.runCarriage(posSpeed);
-            }
-            else{
+                mIntake.shootIntake(posSpeed);
+                mCarriage.runCarriage(posSpeed);
+            }else{
+                mIntake.shootIntake(negSpeed);
                 mCarriage.runCarriage(negSpeed);
             }
-        }
-        else
-        {
+        }else{
             if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble()){
-            mIntake.runIntake(posSpeed);
-            }
-            else{
-            mIntake.runIntake(negSpeed);
-             }
+                mIntake.runIntake(posSpeed);
+                // mCarriage.runCarriage(negSpeed);
+            }else{
+                mIntake.runIntake(negSpeed);
+            }   
+            mCarriage.stop();
         }
       
     }  

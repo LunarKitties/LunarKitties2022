@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 
 public class Carriage extends SubsystemBase{
-    TalonSRX bCarriage = new TalonSRX(Constants.CAN_TALON_TCARRIAGE_MOTOR);
-    TalonSRX tCarriage = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
+    // TalonSRX bCarriage = new TalonSRX(Constants.CAN_TALON_TCARRIAGE_MOTOR);
+    // TalonSRX tCarriage = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
     DigitalInput carriageSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_SWITCH);
     TalonSRX carriageShooter = new TalonSRX(Constants.CAN_TALON_SHOOTER_MOTOR);
 
@@ -26,15 +26,15 @@ public class Carriage extends SubsystemBase{
     }
   
     public void runCarriage(final double speed){
-      bCarriage.set(ControlMode.PercentOutput, speed);
-      tCarriage.set(ControlMode.PercentOutput, speed);
+      // bCarriage.set(ControlMode.PercentOutput, speed);
+      // tCarriage.set(ControlMode.PercentOutput, speed);
       carriageShooter.set(ControlMode.PercentOutput, speed);
 
     }
   
     public void stop(){
-        tCarriage.set(ControlMode.PercentOutput, 0);
-        bCarriage.set(ControlMode.PercentOutput, 0);
+        // tCarriage.set(ControlMode.PercentOutput, 0);
+        // bCarriage.set(ControlMode.PercentOutput, 0);
         carriageShooter.set(ControlMode.PercentOutput, 0);
     }
 

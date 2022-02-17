@@ -27,19 +27,18 @@ import frc.robot.commands.RunIntake;
 import frc.robot.commands.StopWheel;
 import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
+import frc.robot.commands.auto.CarriageDownAuto;
+import frc.robot.commands.auto.CarriageUpAuto;
+import frc.robot.commands.auto.DriveAuto;
 import frc.robot.commands.CarriageUp;
 import frc.robot.commands.CarriageDown;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.RunWheel;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
-import frc.robot.commands.DriveAuto;
- import frc.robot.commands.RunCarriage;
- import frc.robot.commands.CarriageUpAuto;
+import frc.robot.commands.RunCarriage;
 import frc.robot.commands.ChangeConfig;
-import frc.robot.commands.CarriageDownAuto;
- import frc.robot.commands.RunCarriageAuto;
+import frc.robot.commands.RunCarriageAuto;
  import frc.robot.commands.StopCarriage;
 
 /**
