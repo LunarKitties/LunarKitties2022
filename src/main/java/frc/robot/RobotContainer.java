@@ -65,9 +65,7 @@ public class RobotContainer {
   // private final DriveAuto step1 = new DriveAuto(mDrivetrain, 0.5);
   // private final DriveAuto step2 = new DriveAuto(mDrivetrain, 0);
   // private final DriveAuto step3 = new DriveAuto(mDrivetrain, -0.5);
- 
-  private final CarriageUpAuto step2 = new CarriageUpAuto(mCarriage);
-  private final CarriageDownAuto step3 = new CarriageDownAuto(mCarriage);
+
 
 
  // private SequentialCommandGroup autoStart2 = new SequentialCommandGroup(new CarriageUpAuto(mCarriage), new DriveAuto(mDrivetrain, -0.5));
@@ -137,7 +135,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new Auto(mDrivetrain, mCarriage, mWheel);
+    return new Auto(mDrivetrain, mCarriage, mWheel, mIntake);
     //return auto;
   }
 }

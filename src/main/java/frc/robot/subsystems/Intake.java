@@ -23,6 +23,7 @@ public class Intake extends SubsystemBase{
     TalonSRX carriageLow = new TalonSRX(Constants.CAN_TALON_TCARRIAGE_MOTOR);
     TalonSRX carriageUp = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
     TalonSRX carriageShooter = new TalonSRX(Constants.CAN_TALON_SHOOTER_MOTOR);
+    DoubleSolenoid lift = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_CARRIAGE_UP, Constants.PH_CARRIAGE_DOWN);
     
     DoubleSolenoid IntakeJoint = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_INTAKE_UP, Constants.PH_INTAKE_DOWN);
 
@@ -92,5 +93,18 @@ public class Intake extends SubsystemBase{
         return false;
       }
     }
+
+    public void liftUp(){
+      lift.set(Value.kForward);
+  }
+
+   public void liftDown(){
+      lift.set(Value.kReverse);
+  }
+
+  public boolean liftIsUp(){
+    return lift.get() == Value.kForward;
+  }
+
   
 }

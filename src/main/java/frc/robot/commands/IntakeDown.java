@@ -24,4 +24,9 @@ public class IntakeDown extends CommandBase {
     public boolean isFinished(){
         return true;
     }
+
+
+    public void end(){
+        
+    }
 }

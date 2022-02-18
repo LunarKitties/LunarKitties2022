@@ -24,4 +24,9 @@ public class IntakeUp extends CommandBase {
     public boolean isFinished(){
         return true;
     }
+
+    public void end()
+    {
+        
+    }
 }

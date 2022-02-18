@@ -3,14 +3,15 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Carriage;
 import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.Intake;
 //import frc.robot.subsystems.LEDs;
 
 public class CarriageDownAuto extends CommandBase {
-    private final Carriage mCarriage;
+    private final Intake mCarriage;
     private final Timer time = new Timer();
     //private final LEDs mLEDs;
 
-    public CarriageDownAuto(Carriage _Carriage){
+    public CarriageDownAuto(Intake _Carriage){
         mCarriage = _Carriage;
         //mLEDs = _LEDs;
         addRequirements(mCarriage);
@@ -19,6 +20,7 @@ public class CarriageDownAuto extends CommandBase {
     @Override
     public void initialize(){
         time.start();
+        mCarriage.liftDown();
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
 
@@ -27,7 +29,7 @@ public class CarriageDownAuto extends CommandBase {
         if(time.get() > 2){
             return true;
             }
-            mCarriage.liftDown();
+            
            return false;
     }
     
