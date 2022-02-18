@@ -97,14 +97,14 @@ public class RobotContainer {
         () -> xbox1.getRightTriggerAxis()
       )
     );
-/*
+
     mWheel.setDefaultCommand(
       new RunWheel(
         mWheel, 
         () -> xbox2.getLeftY()
       )
     );
-*/
+
   }
 
   /**
