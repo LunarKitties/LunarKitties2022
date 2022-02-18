@@ -20,7 +20,7 @@ public class Carriage extends SubsystemBase{
     
     
 
-    DoubleSolenoid lift = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_CARRIAGE_UP, Constants.PH_CARRIAGE_DOWN);
+    //DoubleSolenoid lift = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_CARRIAGE_UP, Constants.PH_CARRIAGE_DOWN);
 
     public Carriage(){
     }
@@ -38,17 +38,17 @@ public class Carriage extends SubsystemBase{
         carriageShooter.set(ControlMode.PercentOutput, 0);
     }
 
-    public void liftUp(){
-      lift.set(Value.kForward);
-  }
+  //   public void liftUp(){
+  //     lift.set(Value.kForward);
+  // }
 
-   public void liftDown(){
-      lift.set(Value.kReverse);
-  }
+  //  public void liftDown(){
+  //     lift.set(Value.kReverse);
+  // }
 
-  public boolean liftIsUp(){
-    return lift.get() == Value.kForward;
-  }
+  // public boolean liftIsUp(){
+  //   return lift.get() == Value.kForward;
+  // }
 
   public boolean limitSwitchState(){
     return carriageSwitch.get();

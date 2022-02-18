@@ -124,8 +124,8 @@ public class RobotContainer {
     new JoystickButton(xbox1, Button.kB.value).whenPressed(new IntakeUp(mIntake));
     new JoystickButton(xbox1, Button.kX.value).whenPressed(new IntakeDown(mIntake));
 
-    new JoystickButton(xbox1, Button.kY.value).whenPressed(new CarriageUp(mCarriage));
-    new JoystickButton(xbox1, Button.kA.value).whenPressed(new CarriageDown(mCarriage));
+    new JoystickButton(xbox1, Button.kY.value).whenPressed(new CarriageUp(mIntake));
+    new JoystickButton(xbox1, Button.kA.value).whenPressed(new CarriageDown(mIntake));
   }
 
   /**

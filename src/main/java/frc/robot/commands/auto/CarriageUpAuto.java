@@ -7,11 +7,11 @@ import frc.robot.subsystems.Intake;
 //import frc.robot.subsystems.LEDs;
 
 public class CarriageUpAuto extends CommandBase {
-    private final Carriage mCarriage;
+    private final Intake mCarriage;
     private final Timer time = new Timer();
     //private final LEDs mLEDs;
 
-    public CarriageUpAuto(Carriage intake){
+    public CarriageUpAuto(Intake intake){
         mCarriage = intake;
         //mLEDs = _LEDs;
         addRequirements(mCarriage);
@@ -19,13 +19,10 @@ public class CarriageUpAuto extends CommandBase {
 
     @Override
     public void initialize(){
-        //mLEDs.setColor(mLEDs.RAINBOW);
+        mCarriage.liftUp();
+        time.start();
     }
 
-    public void execute()
-    {
-        mCarriage.liftUp();
-    }
 
     @Override
     public boolean isFinished(){

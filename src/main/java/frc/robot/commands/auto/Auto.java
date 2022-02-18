@@ -5,6 +5,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.IntakeDown;
 import frc.robot.commands.RunCarriageAuto;
 import frc.robot.subsystems.Carriage;
 import frc.robot.subsystems.WheelOfFortune;
@@ -16,6 +17,7 @@ import frc.robot.commands.auto.CarriageUpAuto;
 import frc.robot.commands.auto.DriveAuto;
 import frc.robot.commands.RunWheel;
 import frc.robot.commands.auto.RunIntakeAuto;
+
 
 
 public class Auto extends SequentialCommandGroup
@@ -33,9 +35,8 @@ public class Auto extends SequentialCommandGroup
         mIntake = intake;
 
         addCommands(
-            new DriveAuto(mDrivetrain, 0.5),
-            new IntakeUp(mIntake),
-            new DriveAuto(mDrivetrain, -0.5),
+            new RunIntakeAuto(mIntake, 1.0),
+            new CarriageDownAuto(mIntake),
             new DriveAuto(mDrivetrain, 0.5)
         );
     }
