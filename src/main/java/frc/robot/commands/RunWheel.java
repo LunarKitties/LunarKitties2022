@@ -8,18 +8,18 @@ import java.util.function.DoubleSupplier;
 
 public class RunWheel extends CommandBase {
     private final WheelOfFortune mWheel;
-    private final DoubleSupplier mLeftStickY;
+    //private final DoubleSupplier mLeftStickY;
     //private final LEDs mLEDs;
 
-    public RunWheel(WheelOfFortune _wheel, DoubleSupplier LeftStickY){
+    public RunWheel(WheelOfFortune _wheel/*, DoubleSupplier LeftStickY*/){
         mWheel = _wheel;
-        mLeftStickY = LeftStickY;
+        //mLeftStickY = LeftStickY;
         addRequirements(mWheel);
     }
 
     @Override
     public  void execute(){
-        mWheel.climb(mLeftStickY.getAsDouble());
+        mWheel.climb(0.5);
     }
 
 }

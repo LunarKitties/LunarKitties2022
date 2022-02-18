@@ -16,11 +16,13 @@ public class CarriageDownAuto extends CommandBase {
         addRequirements(mCarriage);
     }
 
+    @Override
     public void initialize(){
         time.start();
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
 
+    @Override
     public boolean isFinished(){
         if(time.get() > 2){
             return true;
