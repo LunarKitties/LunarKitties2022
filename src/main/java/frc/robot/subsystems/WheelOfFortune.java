@@ -15,8 +15,8 @@ public class WheelOfFortune extends SubsystemBase{
     }
     public void climb(double speed)
     {
-        leftWheel.set(-speed);
-        rightWheel.set(speed);
+        leftWheel.set(-speed*0.5);
+        rightWheel.set(speed*0.5);
     }
 
     public void stop(){

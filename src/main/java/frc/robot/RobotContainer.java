@@ -60,9 +60,6 @@ public class RobotContainer {
 
   private final DriveAuto step1 = new DriveAuto(mDrivetrain, -0.5);
   
-  private boolean ar = false;
-  private boolean t = true;
-  private boolean altAr = true;
   // private final DriveAuto step1 = new DriveAuto(mDrivetrain, 0.5);
   // private final DriveAuto step2 = new DriveAuto(mDrivetrain, 0);
   // private final DriveAuto step3 = new DriveAuto(mDrivetrain, -0.5);
@@ -72,7 +69,7 @@ public class RobotContainer {
 
 
 
-  private SequentialCommandGroup autoStart = new SequentialCommandGroup();
+  private SequentialCommandGroup autoStart = new SequentialCommandGroup(new DriveAuto(mDrivetrain, 0.2));
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
 
@@ -126,11 +123,11 @@ public class RobotContainer {
     //new JoystickButton(xbox2, Button.kX.value).whenPressed(new StopWheel(mWheel));
     new JoystickButton(xbox1, Button.kB.value).whenPressed(new ChangeConfig(mDrivetrain));
 
-    new JoystickButton(xbox1, Button.kY.value).whenPressed(new IntakeUp(mIntake));
+    new JoystickButton(xbox1, Button.kB.value).whenPressed(new IntakeUp(mIntake));
     new JoystickButton(xbox1, Button.kX.value).whenPressed(new IntakeDown(mIntake));
 
-    new JoystickButton(xbox2, Button.kY.value).whenPressed(new CarriageUp(mCarriage));
-    new JoystickButton(xbox2, Button.kA.value).whenPressed(new CarriageDown(mCarriage));
+    new JoystickButton(xbox1, Button.kY.value).whenPressed(new CarriageUp(mCarriage));
+    new JoystickButton(xbox1, Button.kA.value).whenPressed(new CarriageDown(mCarriage));
   }
 
   /**
@@ -140,7 +137,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    autoStart.addCommands(new DriveAuto(mDrivetrain, 0.5), new DriveAuto(mDrivetrain, 0));
     return autoStart;
     //return auto;
   }
