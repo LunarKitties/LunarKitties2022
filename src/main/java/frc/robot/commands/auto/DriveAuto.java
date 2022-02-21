@@ -7,19 +7,22 @@ import edu.wpi.first.wpilibj.Timer;
 public class DriveAuto extends CommandBase{
 
     private final Drivetrain mDrivetrain;
+    private final double rotations;
     private final double speed;
     private final Timer time = new Timer();
-    // private double
 
-    public DriveAuto(Drivetrain subsystem, double s)
+    public DriveAuto(Drivetrain subsystem, double s, double r)
     {
         mDrivetrain = subsystem;
         speed = s;
+        rotations = r;
         addRequirements(mDrivetrain);
     }
 
     public void initialize()
     {
+        mDrivetrain.resetLeftEncoders();
+        mDrivetrain.resetRightEncoders();
         time.start();
     }
 
@@ -30,7 +33,7 @@ public class DriveAuto extends CommandBase{
 
     public boolean isFinished()
     {
-        if(time.get() > 1)
+        if(mDrivetrain.getLeftEncoders() > rotations || mDrivetrain.getRightEncoders() > rotations)
         {
             mDrivetrain.arDrive(0, 0);
             return true;

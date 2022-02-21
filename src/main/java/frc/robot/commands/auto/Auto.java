@@ -30,7 +30,7 @@ public class Auto extends SequentialCommandGroup
 
         addCommands(
             new RunIntakeAuto(mIntake, 1.0),
-            new DriveAuto(mDrivetrain, 0.5)
+            new DriveAuto(mDrivetrain, 0.5, 10)
         );
     }
 

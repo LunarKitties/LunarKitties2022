@@ -48,6 +48,8 @@ public class DriveWithController extends CommandBase{
             else{
                 mDrivetrain.tDrive(-left, -right);
             }
+
+        mDrivetrain.publish();
             
     }
     

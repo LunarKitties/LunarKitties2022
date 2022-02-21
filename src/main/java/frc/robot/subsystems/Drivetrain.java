@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import java.util.function.IntSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase{
@@ -94,5 +96,26 @@ public class Drivetrain extends SubsystemBase{
         return shifters.get() == Value.kReverse;
     }
 
-    
+    public double getLeftEncoders(){
+        return leftEncoders.getPosition();
+    }
+
+    public double getRightEncoders(){
+        return rightEncoders.getPosition()* - 1.0;
+    }
+
+    public void resetLeftEncoders()
+    {
+        leftEncoders.setPosition(0);
+    }
+
+    public void resetRightEncoders()
+    {
+        rightEncoders.setPosition(0);
+    }
+
+    public void publish(){
+        SmartDashboard.putNumber("leftEncoders", getLeftEncoders());
+        SmartDashboard.putNumber("rightEncoders", getRightEncoders());
+    }
 }
