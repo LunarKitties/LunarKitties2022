@@ -36,11 +36,9 @@ public class Intake extends SubsystemBase{
     public void runIntake(final double speed){
       intakeMotor.set(speed);
       carriageLow.set(ControlMode.PercentOutput, speed);
-      if(colorSeesRed() || colorSeesBlue())
-      {
-      carriageUp.set(ControlMode.PercentOutput, 0);
-      }
-      else{
+      if(colorSeesRed() || colorSeesBlue()){
+        carriageUp.set(ControlMode.PercentOutput, 0);
+      }else{
         carriageUp.set(ControlMode.PercentOutput, speed);
       }
     }
