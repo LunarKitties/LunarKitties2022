@@ -32,22 +32,21 @@ public class Intake extends SubsystemBase{
     DoubleSolenoid IntakeJoint = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_INTAKE_UP, Constants.PH_INTAKE_DOWN);
 
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
-    private final ColorSensorV3 m_colorTop = new ColorSensorV3(i2cPort);
-    private final ColorSensorV3 m_colorBottom = new ColorSensorV3(i2cPort);
 
     DigitalInput carriageSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_SWITCH);
-    AnalogPotentiometer ultrasonic = new AnalogPotentiometer(0, 1000, 50);
+    AnalogPotentiometer ultrasonicT = new AnalogPotentiometer(0, 1000, 50);
+    AnalogPotentiometer ultrasonicB = new AnalogPotentiometer(1, 1000, 50);
 
     public Intake(){
     }
   
     public void runIntake(final double speed){
-      if (colorTopSeesCargo()){
+      if (usTop()){
         carriageTop.set(ControlMode.PercentOutput, 0);
       } else {
         carriageTop.set(ControlMode.PercentOutput, speed);
       }
-      if (colorBottomSeesCargo() && colorTopSeesCargo()){
+      if (usBot() && usTop()){
         carriageBottom.set(ControlMode.PercentOutput, 0);
       } else {
         carriageBottom.set(ControlMode.PercentOutput, speed);
@@ -77,34 +76,6 @@ public class Intake extends SubsystemBase{
       IntakeJoint.set(Value.kReverse);
     }
 
-    public int getRed(){
-      return m_colorTop.getRed();
-    }
-  
-    public int getBlue(){
-      return m_colorTop.getBlue();
-    }
-  
-    public boolean colorTopSeesCargo(){
-      if(m_colorTop.getRed() > 500 || m_colorTop.getBlue() > 50000000)
-      {
-        return true;
-      }
-      else{
-        return false;
-      }
-    }
-
-    public boolean colorBottomSeesCargo(){
-      if(m_colorBottom.getRed() > 500 || m_colorBottom.getBlue() > 50000000)
-      {
-        return true;
-      }
-      else{
-        return false;
-      }
-    }
-
     public void liftUp(){
       lift.set(Value.kForward);
   }
@@ -117,14 +88,30 @@ public class Intake extends SubsystemBase{
     return carriageSwitch.get();
   }
 
-  public double test(){
-    return ultrasonic.get();
+  public boolean usTop(){
+    if(ultrasonicT.get() < 130.0)
+    {
+      return true;
+    }
+    return false;
+  }
+
+  public boolean usBot()
+  {
+    if(ultrasonicB.get() < 130.0)
+    {
+      return true;
+    }
+    return false;
   }
 
   public void publish(){
     // SmartDashboard.putBoolean("colorTopSeesCargo", colorTopSeesCargo());
     // SmartDashboard.putBoolean("colorBottomSeesCargo", colorBottomSeesCargo());
-    SmartDashboard.putNumber("ultrasonic", test());
+    SmartDashboard.putNumber("ultrasonicTdis", ultrasonicT.get());
+    SmartDashboard.putNumber("ultrasonicBdis", ultrasonicB.get());
+    SmartDashboard.putBoolean("ultrasonicTtrue", usTop());
+    SmartDashboard.putBoolean("ultrasonicBTrue", usBot());
     SmartDashboard.putBoolean("carrrriaaaaaagggghhhhaaaaa", carriageTop());
   }
 }

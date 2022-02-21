@@ -22,7 +22,7 @@ public class CarriageUpAuto extends CommandBase {
 
     @Override
     public boolean isFinished(){ 
-        if(!mCarriage.carriageUp()){
+        if(!mCarriage.carriageTop()){
             return true;
         }
         return false;
