@@ -108,7 +108,10 @@ public class Intake extends SubsystemBase{
   public void publish(){
     // SmartDashboard.putBoolean("colorTopSeesCargo", colorTopSeesCargo());
     // SmartDashboard.putBoolean("colorBottomSeesCargo", colorBottomSeesCargo());
-    SmartDashboard.putNumber("ultrasonic", ultrasonicT.get());
+    SmartDashboard.putNumber("ultrasonicTdis", ultrasonicT.get());
+    SmartDashboard.putNumber("ultrasonicBdis", ultrasonicB.get());
+    SmartDashboard.putBoolean("ultrasonicTtrue", usTop());
+    SmartDashboard.putBoolean("ultrasonicBTrue", usBot());
     SmartDashboard.putBoolean("carrrriaaaaaagggghhhhaaaaa", carriageTop());
   }
 }
