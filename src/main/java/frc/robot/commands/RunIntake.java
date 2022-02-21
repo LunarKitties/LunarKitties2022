@@ -26,7 +26,7 @@ public class RunIntake extends CommandBase {
         posSpeed = -mrTrig2.getAsDouble();
         negSpeed = mlTrig2.getAsDouble();
         
-        if(mIntake.liftIsUp()){
+        if(!mIntake.carriageUp()){
             if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble()){
                 mIntake.shootIntake(posSpeed);
             }else{
