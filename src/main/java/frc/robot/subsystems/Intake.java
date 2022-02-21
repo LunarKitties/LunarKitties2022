@@ -24,8 +24,8 @@ import com.revrobotics.ColorSensorV3;
 public class Intake extends SubsystemBase{
 
     CANSparkMax intakeMotor = new CANSparkMax(Constants.CAN_INTAKE_MOTOR, MotorType.kBrushless);
-    TalonSRX carriageLow = new TalonSRX(Constants.CAN_TALON_TCARRIAGE_MOTOR);
-    TalonSRX carriageUp = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
+    TalonSRX carriageBottom = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
+    TalonSRX carriageTop = new TalonSRX(Constants.CAN_TALON_TCARRIAGE_MOTOR);
     TalonSRX carriageShooter = new TalonSRX(Constants.CAN_TALON_SHOOTER_MOTOR);
     DoubleSolenoid lift = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_CARRIAGE_UP, Constants.PH_CARRIAGE_DOWN);
     
@@ -43,29 +43,29 @@ public class Intake extends SubsystemBase{
   
     public void runIntake(final double speed){
       if (colorTopSeesCargo()){
-        carriageUp.set(ControlMode.PercentOutput, 0);
+        carriageTop.set(ControlMode.PercentOutput, 0);
       } else {
-        carriageUp.set(ControlMode.PercentOutput, speed);
+        carriageTop.set(ControlMode.PercentOutput, speed);
       }
       if (colorBottomSeesCargo() && colorTopSeesCargo()){
-        carriageLow.set(ControlMode.PercentOutput, 0);
+        carriageBottom.set(ControlMode.PercentOutput, 0);
       } else {
-        carriageLow.set(ControlMode.PercentOutput, speed);
+        carriageBottom.set(ControlMode.PercentOutput, speed);
       }
       intakeMotor.set(speed);
     }
     
     public void shootIntake(final double speed){
-      carriageLow.set(ControlMode.PercentOutput, speed);
-      carriageUp.set(ControlMode.PercentOutput, speed);
+      carriageBottom.set(ControlMode.PercentOutput, speed);
+      carriageTop.set(ControlMode.PercentOutput, speed);
       carriageShooter.set(ControlMode.PercentOutput, speed);
       intakeMotor.set(0);
     }
   
     public void stop(){
       intakeMotor.set(0);
-      carriageLow.set(ControlMode.PercentOutput, 0);
-      carriageUp.set(ControlMode.PercentOutput, 0);
+      carriageBottom.set(ControlMode.PercentOutput, 0);
+      carriageTop.set(ControlMode.PercentOutput, 0);
       carriageShooter.set(ControlMode.PercentOutput, 0);
     }
   
@@ -117,7 +117,7 @@ public class Intake extends SubsystemBase{
     return lift.get() == Value.kForward;
   }
 
-  public boolean carriageUp(){
+  public boolean carriageTop(){
     return carriageSwitch.get();
   }
 
@@ -129,6 +129,6 @@ public class Intake extends SubsystemBase{
     // SmartDashboard.putBoolean("colorTopSeesCargo", colorTopSeesCargo());
     // SmartDashboard.putBoolean("colorBottomSeesCargo", colorBottomSeesCargo());
     SmartDashboard.putNumber("ultrasonic", test());
-    SmartDashboard.putBoolean("carrrriaaaaaagggghhhhaaaaa", carriageUp());
+    SmartDashboard.putBoolean("carrrriaaaaaagggghhhhaaaaa", carriageTop());
   }
 }
