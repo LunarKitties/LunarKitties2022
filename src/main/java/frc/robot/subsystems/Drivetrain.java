@@ -104,6 +104,11 @@ public class Drivetrain extends SubsystemBase{
         return rightEncoders.getPosition()* - 1.0;
     }
 
+    public double wheelVelocity()
+    {
+        return (leftEncoders.getVelocity() + rightEncoders.getVelocity())/2.0;
+    }
+
     public void resetLeftEncoders()
     {
         leftEncoders.setPosition(0);
@@ -117,5 +122,7 @@ public class Drivetrain extends SubsystemBase{
     public void publish(){
         SmartDashboard.putNumber("leftEncoders", getLeftEncoders());
         SmartDashboard.putNumber("rightEncoders", getRightEncoders());
+        SmartDashboard.putNumber("wheelVelocity", wheelVelocity());
+
     }
 }

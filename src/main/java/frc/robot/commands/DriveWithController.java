@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import java.util.function.DoubleSupplier;
 
+import javax.lang.model.util.ElementScanner6;
+
 public class DriveWithController extends CommandBase{
     private final Drivetrain mDrivetrain;
     private final DoubleSupplier mLeftTrigger;
@@ -48,9 +50,15 @@ public class DriveWithController extends CommandBase{
             else{
                 mDrivetrain.tDrive(-left, -right);
             }
-
-        mDrivetrain.publish();
-            
+/*
+            if(mDrivetrain.wheelVelocity() > 6.0 && mDrivetrain.isLowGear()){
+                mDrivetrain.shiftHigh();
+            }
+            else if(mDrivetrain.wheelVelocity() < 6.0 && mDrivetrain.isHighGear()){
+                mDrivetrain.shiftLow();
+            }
+*/
+            mDrivetrain.publish();
     }
     
 }
