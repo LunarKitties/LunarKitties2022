@@ -32,8 +32,6 @@ public class Intake extends SubsystemBase{
     DoubleSolenoid IntakeJoint = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_INTAKE_UP, Constants.PH_INTAKE_DOWN);
 
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
-    private final ColorSensorV3 m_colorTop = new ColorSensorV3(i2cPort);
-    private final ColorSensorV3 m_colorBottom = new ColorSensorV3(i2cPort);
 
     DigitalInput carriageSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_SWITCH);
     AnalogPotentiometer ultrasonicT = new AnalogPotentiometer(0, 1000, 50);
@@ -43,23 +41,13 @@ public class Intake extends SubsystemBase{
     }
   
     public void runIntake(final double speed){
-<<<<<<< HEAD
       if (usTop()){
-        carriageUp.set(ControlMode.PercentOutput, 0);
-=======
-      if (colorTopSeesCargo()){
         carriageTop.set(ControlMode.PercentOutput, 0);
->>>>>>> 88210e1681b8276a5ca8ec8751e95282c793d341
       } else {
         carriageTop.set(ControlMode.PercentOutput, speed);
       }
-<<<<<<< HEAD
       if (usBot() && usTop()){
-        carriageLow.set(ControlMode.PercentOutput, 0);
-=======
-      if (colorBottomSeesCargo() && colorTopSeesCargo()){
         carriageBottom.set(ControlMode.PercentOutput, 0);
->>>>>>> 88210e1681b8276a5ca8ec8751e95282c793d341
       } else {
         carriageBottom.set(ControlMode.PercentOutput, speed);
       }
