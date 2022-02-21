@@ -113,10 +113,6 @@ public class Intake extends SubsystemBase{
       lift.set(Value.kReverse);
   }
 
-  public boolean liftIsUp(){
-    return lift.get() == Value.kForward;
-  }
-
   public boolean carriageTop(){
     return carriageSwitch.get();
   }
