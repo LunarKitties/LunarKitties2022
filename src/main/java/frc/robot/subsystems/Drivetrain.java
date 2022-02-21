@@ -1,7 +1,9 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -30,6 +32,9 @@ public class Drivetrain extends SubsystemBase{
     public MotorControllerGroup leftWheels = new MotorControllerGroup(lfMotor, lmMotor, lbMotor);
     public MotorControllerGroup rightWheels = new MotorControllerGroup(rfMotor, rmMotor, rbMotor);
 
+        //encoders
+    RelativeEncoder leftEncoders = lfMotor.getEncoder();
+    RelativeEncoder rightEncoders = rfMotor.getEncoder();
 
         //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
@@ -88,4 +93,6 @@ public class Drivetrain extends SubsystemBase{
     public boolean isLowGear(){
         return shifters.get() == Value.kReverse;
     }
+
+    
 }
