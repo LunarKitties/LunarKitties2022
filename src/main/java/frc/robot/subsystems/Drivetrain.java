@@ -33,8 +33,8 @@ public class Drivetrain extends SubsystemBase{
     public MotorControllerGroup rightWheels = new MotorControllerGroup(rfMotor, rmMotor, rbMotor);
 
         //encoders
-    RelativeEncoder leftEncoders = lfMotor.getEncoder();
-    RelativeEncoder rightEncoders = rfMotor.getEncoder();
+    // RelativeEncoder leftEncoders = lfMotor.getEncoder();
+    // RelativeEncoder rightEncoders = rfMotor.getEncoder();
 
         //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
@@ -94,5 +94,16 @@ public class Drivetrain extends SubsystemBase{
         return shifters.get() == Value.kReverse;
     }
 
-    
+    public double getLeftEncoders(){
+        return lfMotor.getEncoder();
+    }
+
+    public double getRightEncoders(){
+        return rfMotor.getEncoder();
+    }
+
+    public void publish(){
+        SmartDashboard.putNumber("leftEncoders", getLeftEncoders());
+        SmartDashboard.putNumber("rightEncoders", getRightEncoders());
+    }
 }
