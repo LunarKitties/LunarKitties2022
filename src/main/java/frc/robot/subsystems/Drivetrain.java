@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import java.util.function.IntSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase{
@@ -33,8 +35,8 @@ public class Drivetrain extends SubsystemBase{
     public MotorControllerGroup rightWheels = new MotorControllerGroup(rfMotor, rmMotor, rbMotor);
 
         //encoders
-    // RelativeEncoder leftEncoders = lfMotor.getEncoder();
-    // RelativeEncoder rightEncoders = rfMotor.getEncoder();
+    RelativeEncoder leftEncoders = lfMotor.getEncoder();
+    RelativeEncoder rightEncoders = rfMotor.getEncoder();
 
         //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
@@ -95,11 +97,21 @@ public class Drivetrain extends SubsystemBase{
     }
 
     public double getLeftEncoders(){
-        return lfMotor.getEncoder();
+        return leftEncoders.getPosition();
     }
 
     public double getRightEncoders(){
-        return rfMotor.getEncoder();
+        return rightEncoders.getPosition()* - 1.0;
+    }
+
+    public void resetLeftEncoders()
+    {
+        leftEncoders.setPosition(0);
+    }
+
+    public void resetRightEncoders()
+    {
+        rightEncoders.setPosition(0);
     }
 
     public void publish(){
