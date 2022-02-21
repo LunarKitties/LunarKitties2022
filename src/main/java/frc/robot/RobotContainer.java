@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.DriveWithController;
 import frc.robot.commands.RunIntake;
-import frc.robot.commands.StopWheel;
 import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
 import frc.robot.commands.auto.DriveAuto;
