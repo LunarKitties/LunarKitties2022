@@ -57,7 +57,6 @@ public class RobotContainer {
   // private final DriveAuto step3 = new DriveAuto(mDrivetrain, -0.5);
 
 
-
  // private SequentialCommandGroup autoStart2 = new SequentialCommandGroup(new CarriageUpAuto(mCarriage), new DriveAuto(mDrivetrain, -0.5));
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
