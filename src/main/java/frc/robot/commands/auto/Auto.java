@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 //commands
 import frc.robot.commands.auto.DriveAuto;
-import frc.robot.commands.RunWheel;
+import frc.robot.commands.TestWheel;
 import frc.robot.commands.auto.RunIntakeAuto;
 
 

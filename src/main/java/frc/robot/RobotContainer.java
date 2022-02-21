@@ -31,7 +31,7 @@ import frc.robot.commands.CarriageUp;
 import frc.robot.commands.CarriageDown;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.IntakeDown;
-import frc.robot.commands.RunWheel;
+import frc.robot.commands.TestWheel;
 import frc.robot.commands.auto.Auto;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ChangeConfig;
@@ -89,9 +89,13 @@ public class RobotContainer {
     );
 
     mWheel.setDefaultCommand(
-      new RunWheel(
+      new TestWheel(
         mWheel, 
-        () -> xbox2.getLeftY()
+        () -> xbox2.getLeftY(),
+        () -> xbox2.getRightBumper(),
+        () -> xbox2.getLeftBumper(),
+        () -> xbox2.getAButton(),
+        () -> xbox2.getBButton()
       )
     );
 
