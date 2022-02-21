@@ -18,6 +18,8 @@ public final class Constants {
     //monkey bars
     public static int CAN_LEFT_WHEEL = 8;
     public static int CAN_RIGHT_WHEEL = 9;
+    public static int CAN_TALON_HANGAR_ARM = 17;
+    public static int CAN_TALON_HANGAR_HOOK = 18;
 
     //drive motors
     public static int CAN_RF_DRIVE_MOTOR = 7;
