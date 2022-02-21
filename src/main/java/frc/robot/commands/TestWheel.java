@@ -36,8 +36,9 @@ public class TestWheel extends CommandBase {
 
     @Override
     public  void execute(){
-        mWheel.spinWheel(mLeftStickY.getAsDouble());
-        
+        if(mLeftStickY.getAsDouble() > 0.1 || mLeftStickY.getAsDouble() < -0.1){
+        mWheel.spinWheel(-mLeftStickY.getAsDouble());
+        }
         if( mrBumper.getAsBoolean() ){
             mWheel.deployArms();
         }else if (mlBumper.getAsBoolean()){

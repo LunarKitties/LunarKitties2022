@@ -38,7 +38,7 @@ public class RunIntake extends CommandBase {
             }else{
                 mIntake.runIntake(negSpeed);
             }   
-            mIntake.stop();
+            //mIntake.stop();
         }
       
     }  

@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import java.util.function.DoubleSupplier;
+import java.lang.Math;
 
 import javax.lang.model.util.ElementScanner6;
 
@@ -50,14 +51,14 @@ public class DriveWithController extends CommandBase{
             else{
                 mDrivetrain.tDrive(-left, -right);
             }
-/*
-            if(mDrivetrain.wheelVelocity() > 6.0 && mDrivetrain.isLowGear()){
-                mDrivetrain.shiftHigh();
-            }
-            else if(mDrivetrain.wheelVelocity() < 6.0 && mDrivetrain.isHighGear()){
+
+            if(Math.abs(mDrivetrain.wheelVelocity()) > 900 && mDrivetrain.isHighGear()){
                 mDrivetrain.shiftLow();
             }
-*/
+            else if(Math.abs(mDrivetrain.wheelVelocity()) < 100 && mDrivetrain.isLowGear()){
+                mDrivetrain.shiftHigh();
+            }
+
             mDrivetrain.publish();
     }
     

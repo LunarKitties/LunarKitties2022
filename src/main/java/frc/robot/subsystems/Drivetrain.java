@@ -104,11 +104,17 @@ public class Drivetrain extends SubsystemBase{
         return rightEncoders.getPosition()* - 1.0;
     }
 
-    public double wheelVelocity()
+    public double getEncoders()
     {
-        return (leftEncoders.getVelocity() + rightEncoders.getVelocity())/2.0;
+        return ((rightEncoders.getPosition()* - 1.0)+leftEncoders.getPosition())/2.0;
     }
 
+    public double wheelVelocity()
+    {
+        return (leftEncoders.getVelocity() + (rightEncoders.getVelocity()*-1.0))/2.0;
+    }
+
+   
     public void resetLeftEncoders()
     {
         leftEncoders.setPosition(0);

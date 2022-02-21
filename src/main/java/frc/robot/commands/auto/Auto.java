@@ -29,8 +29,8 @@ public class Auto extends SequentialCommandGroup
         mIntake = intake;
 
         addCommands(
-            new RunIntakeAuto(mIntake, 1.0),
-            new DriveAuto(mDrivetrain, 0.5, 10)
+            new DriveAuto(mDrivetrain, 0.3, 50),
+            new DriveAuto(mDrivetrain, -0.3, 50)
         );
     }
 

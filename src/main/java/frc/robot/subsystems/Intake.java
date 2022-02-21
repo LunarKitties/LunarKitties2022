@@ -89,7 +89,7 @@ public class Intake extends SubsystemBase{
   }
 
   public boolean usTop(){
-    if(ultrasonicT.get() < 130.0)
+    if(ultrasonicT.get() < 70.0)
     {
       return true;
     }
@@ -98,7 +98,7 @@ public class Intake extends SubsystemBase{
 
   public boolean usBot()
   {
-    if(ultrasonicB.get() < 130.0)
+    if(ultrasonicB.get() < 70.0)
     {
       return true;
     }

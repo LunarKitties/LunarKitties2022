@@ -3,6 +3,7 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Timer;
+import java.lang.Math;
 
 public class DriveAuto extends CommandBase{
 
@@ -28,13 +29,21 @@ public class DriveAuto extends CommandBase{
 
     public void execute()
     {
+        if(Math.abs(mDrivetrain.getLeftEncoders()) > rotations ||
+         Math.abs(mDrivetrain.getRightEncoders()) > rotations){
+             mDrivetrain.arDrive(0, 0);
+         }
+         else{
         mDrivetrain.arDrive(speed, 0);
+         }
+        mDrivetrain.publish();
     }
 
     public boolean isFinished()
     {
-        if(mDrivetrain.getLeftEncoders() > rotations || mDrivetrain.getRightEncoders() > rotations)
-        {
+        if(Math.abs(mDrivetrain.getLeftEncoders()) > rotations ||
+         Math.abs(mDrivetrain.getRightEncoders()) > rotations)
+         {
             mDrivetrain.arDrive(0, 0);
             return true;
         }
