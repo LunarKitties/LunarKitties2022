@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Carriage;
 import frc.robot.subsystems.WheelOfFortune;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
@@ -27,8 +26,6 @@ import frc.robot.commands.RunIntake;
 import frc.robot.commands.StopWheel;
 import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
-import frc.robot.commands.auto.CarriageDownAuto;
-import frc.robot.commands.auto.CarriageUpAuto;
 import frc.robot.commands.auto.DriveAuto;
 import frc.robot.commands.CarriageUp;
 import frc.robot.commands.CarriageDown;
@@ -37,10 +34,7 @@ import frc.robot.commands.IntakeDown;
 import frc.robot.commands.RunWheel;
 import frc.robot.commands.auto.Auto;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.RunCarriage;
 import frc.robot.commands.ChangeConfig;
-import frc.robot.commands.RunCarriageAuto;
- import frc.robot.commands.StopCarriage;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -56,9 +50,7 @@ public class RobotContainer {
   
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
-  private final Carriage mCarriage = new Carriage();
   private final WheelOfFortune mWheel = new WheelOfFortune();
-
   
   private final DriveAuto step1 = new DriveAuto(mDrivetrain, -0.5);
   
@@ -91,7 +83,6 @@ public class RobotContainer {
 
     mIntake.setDefaultCommand(
       new RunIntake(
-        mCarriage,
         mIntake,
         () -> xbox1.getLeftTriggerAxis(),
         () -> xbox1.getRightTriggerAxis()
@@ -135,7 +126,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new Auto(mDrivetrain, mCarriage, mWheel, mIntake);
+    return new Auto(mDrivetrain, mWheel, mIntake);
     //return auto;
   }
 }

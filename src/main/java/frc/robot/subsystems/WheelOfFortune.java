@@ -9,8 +9,8 @@ public class WheelOfFortune extends SubsystemBase{
 
     CANSparkMax leftWheel = new CANSparkMax(Constants.CAN_LEFT_WHEEL, MotorType.kBrushless);
     CANSparkMax rightWheel = new CANSparkMax(Constants.CAN_RIGHT_WHEEL, MotorType.kBrushless);
-    TalonSRX hangarArm = new TalonSRX(Constants.CAN_TALON_HANGAR_ARM);
-    TalonSRX hangarHook = new TalonSRX(Constants.CAN_TALON_HANGAR_HOOK);
+    // TalonSRX hangarArm = new TalonSRX(Constants.CAN_TALON_HANGAR_ARM);
+    // TalonSRX hangarHook = new TalonSRX(Constants.CAN_TALON_HANGAR_HOOK);
 
     public WheelOfFortune()
     {

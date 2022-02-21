@@ -6,10 +6,14 @@ import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
+import com.revrobotics.AnalogInput;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
@@ -28,19 +32,27 @@ public class Intake extends SubsystemBase{
     DoubleSolenoid IntakeJoint = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_INTAKE_UP, Constants.PH_INTAKE_DOWN);
 
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
-    private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+    private final ColorSensorV3 m_colorTop = new ColorSensorV3(i2cPort);
+    private final ColorSensorV3 m_colorBottom = new ColorSensorV3(i2cPort);
+
+    DigitalInput carriageSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_SWITCH);
+    AnalogPotentiometer ultrasonic = new AnalogPotentiometer(0, 1000, 50);
 
     public Intake(){
     }
   
     public void runIntake(final double speed){
-      intakeMotor.set(speed);
-      carriageLow.set(ControlMode.PercentOutput, speed);
-      if(colorSeesRed() || colorSeesBlue()){
+      if (colorTopSeesCargo()){
         carriageUp.set(ControlMode.PercentOutput, 0);
-      }else{
+      } else {
         carriageUp.set(ControlMode.PercentOutput, speed);
       }
+      if (colorBottomSeesCargo() && colorTopSeesCargo()){
+        carriageLow.set(ControlMode.PercentOutput, 0);
+      } else {
+        carriageLow.set(ControlMode.PercentOutput, speed);
+      }
+      intakeMotor.set(speed);
     }
     
     public void shootIntake(final double speed){
@@ -66,15 +78,15 @@ public class Intake extends SubsystemBase{
     }
 
     public int getRed(){
-      return m_colorSensor.getRed();
+      return m_colorTop.getRed();
     }
   
     public int getBlue(){
-      return m_colorSensor.getBlue();
+      return m_colorTop.getBlue();
     }
   
-    public boolean colorSeesRed(){
-      if(m_colorSensor.getRed() > 500)
+    public boolean colorTopSeesCargo(){
+      if(m_colorTop.getRed() > 500 || m_colorTop.getBlue() > 50000000)
       {
         return true;
       }
@@ -83,8 +95,8 @@ public class Intake extends SubsystemBase{
       }
     }
 
-    public boolean colorSeesBlue(){
-      if(m_colorSensor.getBlue() > 50000000)
+    public boolean colorBottomSeesCargo(){
+      if(m_colorBottom.getRed() > 500 || m_colorBottom.getBlue() > 50000000)
       {
         return true;
       }
@@ -105,5 +117,13 @@ public class Intake extends SubsystemBase{
     return lift.get() == Value.kForward;
   }
 
-  
+  public double test(){
+    return ultrasonic.get();
+  }
+
+  public void publish(){
+    // SmartDashboard.putBoolean("colorTopSeesCargo", colorTopSeesCargo());
+    // SmartDashboard.putBoolean("colorBottomSeesCargo", colorBottomSeesCargo());
+    SmartDashboard.getNumber("ultrasonic", test());
+  }
 }
