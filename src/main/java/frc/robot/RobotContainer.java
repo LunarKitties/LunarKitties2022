@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.DriveWithController;
 import frc.robot.commands.RunIntake;
-import frc.robot.commands.StopWheel;
 import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
 import frc.robot.commands.auto.DriveAuto;
@@ -56,7 +55,6 @@ public class RobotContainer {
   // private final DriveAuto step1 = new DriveAuto(mDrivetrain, 0.5);
   // private final DriveAuto step2 = new DriveAuto(mDrivetrain, 0);
   // private final DriveAuto step3 = new DriveAuto(mDrivetrain, -0.5);
-
 
 
  // private SequentialCommandGroup autoStart2 = new SequentialCommandGroup(new CarriageUpAuto(mCarriage), new DriveAuto(mDrivetrain, -0.5));
