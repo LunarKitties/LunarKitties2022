@@ -117,6 +117,10 @@ public class Intake extends SubsystemBase{
     return lift.get() == Value.kForward;
   }
 
+  public boolean carriageUp(){
+    return carriageSwitch.get();
+  }
+
   public double test(){
     return ultrasonic.get();
   }
@@ -124,6 +128,7 @@ public class Intake extends SubsystemBase{
   public void publish(){
     // SmartDashboard.putBoolean("colorTopSeesCargo", colorTopSeesCargo());
     // SmartDashboard.putBoolean("colorBottomSeesCargo", colorBottomSeesCargo());
-    SmartDashboard.getNumber("ultrasonic", test());
+    SmartDashboard.putNumber("ultrasonic", test());
+    SmartDashboard.putBoolean("carrrriaaaaaagggghhhhaaaaa", carriageUp());
   }
 }
