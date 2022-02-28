@@ -17,6 +17,7 @@ public class CarriageDown extends CommandBase {
     @Override
     public void initialize(){
         mCarriage.liftDown();
+        mCarriage.resetBalls();
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
 

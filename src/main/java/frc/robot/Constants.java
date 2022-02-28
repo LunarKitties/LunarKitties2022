@@ -47,6 +47,8 @@ public final class Constants {
 
     //digital imput ports
     public static final int CARRIAGE_LIFT_SWITCH = 0;
+    public static final int CARRIAGE_TOP_TOUCH_SENSOR = 1;
+    public static final int CARRIAGE_BOT_TOUCH_SENSOR = 2;
 
     //analog input ports
     public static final int ULTRASONIC_TOP = 0;

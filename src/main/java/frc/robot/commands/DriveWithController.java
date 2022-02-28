@@ -52,10 +52,10 @@ public class DriveWithController extends CommandBase{
                 mDrivetrain.tDrive(-left, -right);
             }
 
-            if(Math.abs(mDrivetrain.wheelVelocity()) > 900 && mDrivetrain.isHighGear()){
+            if(Math.abs(mDrivetrain.wheelVelocity()) > 1100 && mDrivetrain.isHighGear()){
                 mDrivetrain.shiftLow();
             }
-            else if(Math.abs(mDrivetrain.wheelVelocity()) < 100 && mDrivetrain.isLowGear()){
+            else if(Math.abs(mDrivetrain.wheelVelocity()) < 200 && mDrivetrain.isLowGear()){
                 mDrivetrain.shiftHigh();
             }
 

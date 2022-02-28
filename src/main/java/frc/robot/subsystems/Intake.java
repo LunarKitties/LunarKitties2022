@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.I2C;
 
 import com.revrobotics.ColorSensorV3;
@@ -29,24 +30,30 @@ public class Intake extends SubsystemBase{
     TalonSRX carriageShooter = new TalonSRX(Constants.CAN_TALON_SHOOTER_MOTOR);
     DoubleSolenoid lift = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_CARRIAGE_UP, Constants.PH_CARRIAGE_DOWN);
     
+
+
     DoubleSolenoid IntakeJoint = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_INTAKE_UP, Constants.PH_INTAKE_DOWN);
 
+    //ball detection
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
+    private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+    public int numBalls = 0;
 
+    //
     DigitalInput carriageSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_SWITCH);
-    AnalogPotentiometer ultrasonicT = new AnalogPotentiometer(0, 1000, 50);
-    AnalogPotentiometer ultrasonicB = new AnalogPotentiometer(1, 1000, 50);
+    AnalogPotentiometer ultrasonicT = new AnalogPotentiometer(0, 1000, 0);
+    AnalogPotentiometer ultrasonicB = new AnalogPotentiometer(1, 1000, 0);
 
     public Intake(){
     }
-  
+      
     public void runIntake(final double speed){
-      if (usTop()){
+      if (numBalls == 1 || numBalls == 2){
         carriageTop.set(ControlMode.PercentOutput, 0);
       } else {
         carriageTop.set(ControlMode.PercentOutput, speed);
       }
-      if (usBot() && usTop()){
+      if (numBalls == 2){
         carriageBottom.set(ControlMode.PercentOutput, 0);
       } else {
         carriageBottom.set(ControlMode.PercentOutput, speed);
@@ -88,30 +95,55 @@ public class Intake extends SubsystemBase{
     return carriageSwitch.get();
   }
 
-  public boolean usTop(){
-    if(ultrasonicT.get() < 70.0)
-    {
-      return true;
-    }
-    return false;
+  public int numBalls()
+  {
+    return numBalls;
   }
 
-  public boolean usBot()
+  public void addBall()
   {
-    if(ultrasonicB.get() < 70.0)
+    numBalls++;
+  }
+   
+  public void resetBalls()
+  {
+    numBalls = 0;
+  }
+ 
+
+  public int getRed(){
+    return m_colorSensor.getRed();
+  }
+
+  public int getBlue(){
+    return m_colorSensor.getBlue();
+  }
+
+  public boolean colorSeesRed(){
+    if(m_colorSensor.getRed() > 500)
     {
       return true;
     }
-    return false;
+    else{
+      return false;
+    }
+  }
+
+  public boolean colorSeesBlue(){
+    if(m_colorSensor.getBlue() > 50000000)
+    {
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   public void publish(){
     // SmartDashboard.putBoolean("colorTopSeesCargo", colorTopSeesCargo());
     // SmartDashboard.putBoolean("colorBottomSeesCargo", colorBottomSeesCargo());
-    SmartDashboard.putNumber("ultrasonicTdis", ultrasonicT.get());
-    SmartDashboard.putNumber("ultrasonicBdis", ultrasonicB.get());
-    SmartDashboard.putBoolean("ultrasonicTtrue", usTop());
-    SmartDashboard.putBoolean("ultrasonicBTrue", usBot());
+    SmartDashboard.putBoolean("colorBlueBall", colorSeesBlue());
+    SmartDashboard.putBoolean("colorRedBall", colorSeesRed());
     SmartDashboard.putBoolean("carrrriaaaaaagggghhhhaaaaa", carriageTop());
   }
 }

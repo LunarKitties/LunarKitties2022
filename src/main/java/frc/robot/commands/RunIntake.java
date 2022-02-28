@@ -9,6 +9,7 @@ public class RunIntake extends CommandBase {
     private final DoubleSupplier mrTrig2;
     private final DoubleSupplier mlTrig2;
     private final Intake mIntake;
+    private boolean ballSeen = false;
 
    public RunIntake(Intake Subsystem, DoubleSupplier rTrig2, DoubleSupplier lTrig2)
     {
@@ -25,6 +26,19 @@ public class RunIntake extends CommandBase {
     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
         posSpeed = -mrTrig2.getAsDouble();
         negSpeed = mlTrig2.getAsDouble();
+
+        if(negSpeed > -0.05){
+            mIntake.resetBalls();
+        }
+        else if(!ballSeen && mIntake.numBalls() < 2 && (mIntake.colorSeesRed() || mIntake.colorSeesBlue()))
+        {
+            ballSeen = true;
+            mIntake.addBall();
+        }
+        else if(ballSeen && !(mIntake.colorSeesRed() || mIntake.colorSeesBlue()))
+        {
+            ballSeen = false;
+        }
         
         if(!mIntake.carriageTop()){
             if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble()){
