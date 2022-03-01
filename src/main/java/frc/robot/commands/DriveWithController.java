@@ -48,7 +48,7 @@ public class DriveWithController extends CommandBase{
             }
             else if(mConfig == 2)
             {
-                mDrivetrain.arDrive(-left, rotate);
+                mDrivetrain.arDrive(-left, rotate*0.7);
             }
             else{
                 mDrivetrain.tDrive(-left, -right);

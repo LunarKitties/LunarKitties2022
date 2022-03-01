@@ -5,14 +5,12 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.Timer;
 
-public class RunIntakeAuto extends CommandBase{
+public class IntakeAuto extends CommandBase{
 
     private final Intake mIntake;
     private final double speed;
-    private final Timer time = new Timer();
-    // private double
 
-    public RunIntakeAuto(Intake subsystem, double s)
+    public IntakeAuto(Intake subsystem, double s)
     {
         mIntake = subsystem;
         speed = s;
@@ -21,19 +19,18 @@ public class RunIntakeAuto extends CommandBase{
 
     public void initialize()
     {
-        time.start();
     }
 
     public void execute()
     {
-        mIntake.shootIntake(speed);
+        mIntake.runIntake(speed);
     }
 
     public boolean isFinished()
     {
-        if(time.get() > 2)
+        if(mIntake.colorSeesRed() || mIntake.colorSeesBlue())
         {
-            mIntake.shootIntake(0);
+            mIntake.stop();
             return true;
         }
         return false;
@@ -41,7 +38,8 @@ public class RunIntakeAuto extends CommandBase{
  
     public void end()
     {
-        mIntake.shootIntake(0);
+        mIntake.stop();
     }
     
 }
+
