@@ -49,8 +49,8 @@ public class WheelOfFortune extends SubsystemBase{
     */
     public void spinWheel(double speed)
     {
-        leftWheel.set(-speed*0.60);
-        rightWheel.set(speed*0.60);
+        leftWheel.set(-speed*0.75);
+        rightWheel.set(speed*0.75);
     }
 
 
