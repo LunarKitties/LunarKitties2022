@@ -14,9 +14,10 @@ public class DriveWithController extends CommandBase{
     private final DoubleSupplier mRightStickX;
     private final DoubleSupplier mLeftStickY;
     private final DoubleSupplier mRightStickY;
+    private boolean manualOveride;
     private int mConfig;
 
-    public DriveWithController( Drivetrain subsystem, DoubleSupplier leftTrigger, DoubleSupplier rightTrigger, DoubleSupplier rightStickX, DoubleSupplier leftStickY, DoubleSupplier rightStickY, int config){
+    public DriveWithController( Drivetrain subsystem, DoubleSupplier leftTrigger, DoubleSupplier rightTrigger, DoubleSupplier rightStickX, DoubleSupplier leftStickY, DoubleSupplier rightStickY, int config, boolean MmanualOveride){
         mDrivetrain = subsystem;
         mLeftTrigger = leftTrigger;
         mRightTrigger = rightTrigger;
@@ -24,6 +25,7 @@ public class DriveWithController extends CommandBase{
         mLeftStickY = leftStickY;
         mRightStickY = rightStickY;
         mConfig = config;
+        manualOveride = MmanualOveride;
         addRequirements(mDrivetrain);
     }
 
@@ -52,10 +54,11 @@ public class DriveWithController extends CommandBase{
                 mDrivetrain.tDrive(-left, -right);
             }
 
-            if(Math.abs(mDrivetrain.wheelVelocity()) > 1100 && mDrivetrain.isHighGear()){
+          
+            if(!mDrivetrain.getMode() && Math.abs(mDrivetrain.wheelVelocity()) > 1100 && mDrivetrain.isHighGear()){
                 mDrivetrain.shiftLow();
             }
-            else if(Math.abs(mDrivetrain.wheelVelocity()) < 200 && mDrivetrain.isLowGear()){
+            else if(!mDrivetrain.getMode() && Math.abs(mDrivetrain.wheelVelocity()) < 200 && mDrivetrain.isLowGear()){
                 mDrivetrain.shiftHigh();
             }
 

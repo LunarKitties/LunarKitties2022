@@ -27,13 +27,13 @@ import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
 import frc.robot.commands.auto.DriveAuto;
 import frc.robot.commands.CarriageUp;
+import frc.robot.commands.ChangeOveride;
 import frc.robot.commands.CarriageDown;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.TestWheel;
 import frc.robot.commands.auto.Auto;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ChangeConfig;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -74,7 +74,8 @@ public class RobotContainer {
         () -> xbox1.getRightX(),
         () -> xbox1.getLeftY(),
         () -> xbox1.getRightY(),
-        mDrivetrain.getConfig()
+        mDrivetrain.getConfig(),
+        mDrivetrain.getMode()
       )
     );
 
@@ -85,19 +86,19 @@ public class RobotContainer {
         () -> xbox1.getRightTriggerAxis()
       )
     );
-    /*
+    
 
     mWheel.setDefaultCommand(
       new TestWheel(
         mWheel, 
-        () -> xbox2.getLeftY(),
+        () -> xbox2.getRightY(),
         () -> xbox2.getRightBumper(),
         () -> xbox2.getLeftBumper(),
         () -> xbox2.getAButton(),
         () -> xbox2.getBButton()
       )
     );
-*/
+
   }
 
   /**
@@ -111,6 +112,7 @@ public class RobotContainer {
     
     new JoystickButton(xbox1, Button.kRightBumper.value).whenPressed(new WheelsShiftHigh(mDrivetrain));
     new JoystickButton(xbox1, Button.kLeftBumper.value).whenPressed(new WheelsShiftLow(mDrivetrain));
+    new JoystickButton(xbox2, Button.kLeftBumper.value).whenPressed(new ChangeOveride(mDrivetrain));
 
     //new JoystickButton(xbox2, Button.kX.value).whenPressed(new StopWheel(mWheel));
 

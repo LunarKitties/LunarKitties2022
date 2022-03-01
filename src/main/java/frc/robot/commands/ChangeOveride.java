@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 //import frc.robot.subsystems.LEDs;
 
-public class ChangeConfig extends CommandBase {
+public class ChangeOveride extends CommandBase {
     private final Drivetrain mDrivetrain;
     //private final LEDs mLEDs;
 
-    public ChangeConfig(Drivetrain _Drivetrain){
+    public ChangeOveride(Drivetrain _Drivetrain){
         mDrivetrain = _Drivetrain;
         //mLEDs = _LEDs;
         addRequirements(mDrivetrain);
@@ -16,7 +16,8 @@ public class ChangeConfig extends CommandBase {
 
     @Override
     public void initialize(){
-        mDrivetrain.changeConfig();
+        mDrivetrain.changeMode();
+        //mLEDs.setColor(mLEDs.RAINBOW_OCEAN);
     }
 
     @Override

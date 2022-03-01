@@ -21,7 +21,7 @@ public class WheelOfFortune extends SubsystemBase{
     //here
 
         //second arm hook motors
-    TalonSRX hangarHook = new TalonSRX(Constants.CAN_TALON_HANGAR_HOOK);
+   // TalonSRX hangarHook = new TalonSRX(Constants.CAN_TALON_HANGAR_HOOK);
 
     public WheelOfFortune()
     {
@@ -36,7 +36,7 @@ public class WheelOfFortune extends SubsystemBase{
     public void stopArms(){
         hangarArm.set(ControlMode.PercentOutput, 0);
     }
-
+/*
     public void closeHooks(){
         hangarHook.set(ControlMode.PercentOutput, 0.5);
     }
@@ -46,7 +46,7 @@ public class WheelOfFortune extends SubsystemBase{
     public void stopHooks(){
         hangarHook.set(ControlMode.PercentOutput, 0);
     }
-    
+    */
     public void spinWheel(double speed)
     {
         leftWheel.set(-speed);

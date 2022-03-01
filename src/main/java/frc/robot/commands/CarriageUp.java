@@ -17,12 +17,13 @@ public class CarriageUp extends CommandBase {
     @Override
     public void initialize(){
         mCarriage.liftUp();
+        mCarriage.resetBalls();
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
 
     @Override
     public boolean isFinished(){
-            return true;
+        return true;
     }
 
     public void end()

@@ -19,7 +19,7 @@ public final class Constants {
     public static int CAN_LEFT_WHEEL = 8;
     public static int CAN_RIGHT_WHEEL = 9;
     public static int CAN_TALON_HANGAR_ARM = 17;
-    public static int CAN_TALON_HANGAR_HOOK = 18;
+    //public static int CAN_TALON_HANGAR_HOOK = 18;
 
     //drive motors
     public static int CAN_RF_DRIVE_MOTOR = 7;
@@ -34,7 +34,7 @@ public final class Constants {
 
     //carriage
     public static int CAN_TALON_BCARRIAGE_MOTOR = 13;
-    public static int CAN_TALON_TCARRIAGE_MOTOR = 10;
+    public static int CAN_TALON_TCARRIAGE_MOTOR = 18;
     public static int CAN_TALON_SHOOTER_MOTOR = 14;
 
     //PH Ports

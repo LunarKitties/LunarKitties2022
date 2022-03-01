@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
@@ -9,14 +10,12 @@ public class RunIntake extends CommandBase {
     private final DoubleSupplier mrTrig2;
     private final DoubleSupplier mlTrig2;
     private final Intake mIntake;
-    private boolean ballSeen = false;
 
    public RunIntake(Intake Subsystem, DoubleSupplier rTrig2, DoubleSupplier lTrig2)
     {
         mrTrig2 = rTrig2;
         mlTrig2 = lTrig2;
         mIntake = Subsystem;
-
         addRequirements(mIntake);
     }
     @Override
@@ -26,30 +25,20 @@ public class RunIntake extends CommandBase {
     //Speed is based on the triggers. Left Trigger is reverse, Right Trigger is forward
         posSpeed = -mrTrig2.getAsDouble();
         negSpeed = mlTrig2.getAsDouble();
-
-        if(negSpeed > -0.05){
-            mIntake.resetBalls();
-        }
-        else if(!ballSeen && mIntake.numBalls() < 2 && (mIntake.colorSeesRed() || mIntake.colorSeesBlue()))
-        {
-            ballSeen = true;
-            mIntake.addBall();
-        }
-        else if(ballSeen && !(mIntake.colorSeesRed() || mIntake.colorSeesBlue()))
-        {
-            ballSeen = false;
-        }
         
-        if(!mIntake.carriageTop()){
+        if(mIntake.carriageTop()){
             if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble()){
+                
                 mIntake.shootIntake(posSpeed);
             }else{
                 mIntake.shootIntake(negSpeed);
             }
-        }else{
+        }else{ 
             if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble()){
+                
                 mIntake.runIntake(posSpeed);
             }else{
+               
                 mIntake.runIntake(negSpeed);
             }   
             //mIntake.stop();

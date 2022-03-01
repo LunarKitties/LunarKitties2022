@@ -29,6 +29,8 @@ public class Drivetrain extends SubsystemBase{
     CANSparkMax rbMotor = new CANSparkMax(Constants.CAN_RB_DRIVE_MOTOR, MotorType.kBrushless);
 
     private int config = 2;
+    // public boolean manualOveride = false;
+    public boolean manualOveride;
     
         //Group the Left and Right Motors together
     public MotorControllerGroup leftWheels = new MotorControllerGroup(lfMotor, lmMotor, lbMotor);
@@ -48,6 +50,17 @@ public class Drivetrain extends SubsystemBase{
     public Drivetrain(){
         dd.setSafetyEnabled(false);
         shifters.set(Value.kReverse);
+        manualOveride = false;
+    }
+
+    public void changeMode()
+    {
+        manualOveride = !manualOveride;
+    }
+
+    public boolean getMode()
+    {
+        return manualOveride;
     }
 
     public void changeConfig()
@@ -128,6 +141,7 @@ public class Drivetrain extends SubsystemBase{
     public void publish(){
         SmartDashboard.putNumber("leftEncoders", getLeftEncoders());
         SmartDashboard.putNumber("rightEncoders", getRightEncoders());
+        SmartDashboard.putBoolean("manualOveride", manualOveride);
         SmartDashboard.putNumber("wheelVelocity", wheelVelocity());
 
     }
