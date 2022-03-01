@@ -55,7 +55,7 @@ public class DriveWithController extends CommandBase{
             }
 
           
-            if(!mDrivetrain.getMode() && Math.abs(mDrivetrain.wheelVelocity()) > 1100 && mDrivetrain.isHighGear()){
+            if(!mDrivetrain.getMode() && Math.abs(mDrivetrain.wheelVelocity()) > 1400 && mDrivetrain.isHighGear()){
                 mDrivetrain.shiftLow();
             }
             else if(!mDrivetrain.getMode() && Math.abs(mDrivetrain.wheelVelocity()) < 200 && mDrivetrain.isLowGear()){

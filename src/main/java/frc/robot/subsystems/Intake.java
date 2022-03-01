@@ -3,6 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants;
+
+import java.util.function.DoubleSupplier;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -49,7 +52,7 @@ public class Intake extends SubsystemBase{
     }
       
     public void runIntake(final double speed){
-      countBalls();
+      countBalls(speed);
       if (numBalls == 1){
         carriageTop.set(ControlMode.PercentOutput, 0);
         carriageBottom.set(ControlMode.PercentOutput, speed);
@@ -100,9 +103,13 @@ public class Intake extends SubsystemBase{
     return !carriageSwitch.get();
   }
 
-  public void countBalls()
+  public void countBalls(double speed)
   {
-    if(!ballSeen && numBalls < 2 && (colorSeesRed() || colorSeesBlue()))
+    if(speed < -0.05)
+    {
+      numBalls = 0;
+    }
+    else if(!ballSeen && numBalls < 2 && (colorSeesRed() || colorSeesBlue()))
     {
       ballSeen = true;
       numBalls++;

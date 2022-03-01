@@ -66,11 +66,14 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    mDrivetrain.gyroCalibrate();
+    mDrivetrain.gyroReset();
+
     mDrivetrain.setDefaultCommand(
       new DriveWithController(
         mDrivetrain, 
         () -> xbox1.getLeftTriggerAxis(), 
-        () -> xbox1.getRightTriggerAxis(), 
+        () -> xbox1.getRightTriggerAxis(),  
         () -> xbox1.getRightX(),
         () -> xbox1.getLeftY(),
         () -> xbox1.getRightY(),
@@ -83,7 +86,9 @@ public class RobotContainer {
       new RunIntake(
         mIntake,
         () -> xbox1.getLeftTriggerAxis(),
-        () -> xbox1.getRightTriggerAxis()
+        () -> xbox1.getRightTriggerAxis(),
+        () -> xbox2.getLeftTriggerAxis(),
+        () -> xbox2.getRightTriggerAxis()
       )
     );
     
@@ -116,11 +121,11 @@ public class RobotContainer {
 
     //new JoystickButton(xbox2, Button.kX.value).whenPressed(new StopWheel(mWheel));
 
-    new JoystickButton(xbox1, Button.kB.value).whenPressed(new IntakeUp(mIntake));
-    new JoystickButton(xbox1, Button.kX.value).whenPressed(new IntakeDown(mIntake));
+    new JoystickButton(xbox2, Button.kB.value).whenPressed(new IntakeUp(mIntake));
+    new JoystickButton(xbox2, Button.kX.value).whenPressed(new IntakeDown(mIntake));
 
-    new JoystickButton(xbox1, Button.kY.value).whenPressed(new CarriageUp(mIntake));
-    new JoystickButton(xbox1, Button.kA.value).whenPressed(new CarriageDown(mIntake));
+    new JoystickButton(xbox2, Button.kY.value).whenPressed(new CarriageUp(mIntake));
+    new JoystickButton(xbox2, Button.kA.value).whenPressed(new CarriageDown(mIntake));
   }
 
   /**

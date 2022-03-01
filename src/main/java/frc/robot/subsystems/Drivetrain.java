@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.revrobotics.CANEncoder;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -39,6 +38,8 @@ public class Drivetrain extends SubsystemBase{
         //encoders
     RelativeEncoder leftEncoders = lfMotor.getEncoder();
     RelativeEncoder rightEncoders = rfMotor.getEncoder();
+
+    AHRS gyro = new AHRS();
 
         //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
@@ -138,11 +139,23 @@ public class Drivetrain extends SubsystemBase{
         rightEncoders.setPosition(0);
     }
 
+    public void gyroCalibrate(){
+        gyro.calibrate();
+    }  
+
+    public void gyroReset(){
+        gyro.reset();
+    }
+
+    public double getAngle(){
+        return gyro.getAngle() % 360;
+    }
+
     public void publish(){
         SmartDashboard.putNumber("leftEncoders", getLeftEncoders());
         SmartDashboard.putNumber("rightEncoders", getRightEncoders());
         SmartDashboard.putBoolean("manualOveride", manualOveride);
         SmartDashboard.putNumber("wheelVelocity", wheelVelocity());
-
+        SmartDashboard.putNumber("ANGELSinTheOutfield", getAngle());
     }
 }
