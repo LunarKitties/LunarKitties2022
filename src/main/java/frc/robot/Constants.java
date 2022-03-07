@@ -19,7 +19,7 @@ public final class Constants {
     public static int CAN_LEFT_WHEEL = 8;
     public static int CAN_RIGHT_WHEEL = 9;
     public static int CAN_TALON_HANGAR_ARM = 17;
-    //public static int CAN_TALON_HANGAR_HOOK = 18;
+    public static int CAN_TALON_HARM_HOOK = 18;
 
     //drive motors
     public static int CAN_RF_DRIVE_MOTOR = 7;
@@ -33,9 +33,10 @@ public final class Constants {
     public static int CAN_INTAKE_MOTOR = 16;
 
     //carriage
-    public static int CAN_TALON_BCARRIAGE_MOTOR = 13;
-    public static int CAN_TALON_TCARRIAGE_MOTOR = 18;
-    public static int CAN_TALON_SHOOTER_MOTOR = 14;
+    public static int CAN_TALON_BCARRIAGE_MOTOR = 14;
+    public static int CAN_TALON_TCARRIAGE_MOTOR = 13;
+    public static int CAN_LSHOOTER_MOTOR = 19;
+    public static int CAN_RSHOOTER_MOTOR = 20;
 
     //PH Ports
     public static final int PH_DRIVE_S_OUT = 2;
@@ -44,11 +45,19 @@ public final class Constants {
     public static final int PH_INTAKE_DOWN = 5;
     public static final int PH_CARRIAGE_UP = 0;
     public static final int PH_CARRIAGE_DOWN = 1;
+    public static final int PH_MARM_HOOK_CLAMP = 7;
+    public static final int PH_MARM_HOOK_UNCLAMP = 8;
 
     //digital imput ports
     public static final int CARRIAGE_LIFT_SWITCH = 0;
-    public static final int CARRIAGE_TOP_TOUCH_SENSOR = 1;
-    public static final int CARRIAGE_BOT_TOUCH_SENSOR = 2;
+    public static int HARM_LEFT_CLAMP = 1;
+    public static int HARM_RIGHT_CLAMP = 2;
+    public static int MARM_LEFT_CLAMP = 3;
+    public static int MARM_RIGHT_CLAMP = 4;
+    public static int TARM_LEFT_CLAMP = 5;
+    public static int TARM_RIGHT_CLAMP = 6;
+    public static int HANGARARM_LEFT_SWITCH = 7;
+    public static int HANGARARM_RIGHT_SWITCH = 8;
 
     //analog input ports
     public static final int ULTRASONIC_TOP = 0;

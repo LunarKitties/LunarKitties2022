@@ -30,7 +30,8 @@ public class Intake extends SubsystemBase{
     CANSparkMax intakeMotor = new CANSparkMax(Constants.CAN_INTAKE_MOTOR, MotorType.kBrushless);
     TalonSRX carriageBottom = new TalonSRX(Constants.CAN_TALON_BCARRIAGE_MOTOR);
     TalonSRX carriageTop = new TalonSRX(Constants.CAN_TALON_TCARRIAGE_MOTOR);
-    TalonSRX carriageShooter = new TalonSRX(Constants.CAN_TALON_SHOOTER_MOTOR);
+    CANSparkMax carriageLeftShooter = new CANSparkMax(Constants.CAN_LSHOOTER_MOTOR, MotorType.kBrushless);
+    CANSparkMax carriageRightShooter = new CANSparkMax(Constants.CAN_RSHOOTER_MOTOR, MotorType.kBrushless);
     DoubleSolenoid lift = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_CARRIAGE_UP, Constants.PH_CARRIAGE_DOWN);
     
     DoubleSolenoid IntakeJoint = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_INTAKE_UP, Constants.PH_INTAKE_DOWN);
@@ -41,10 +42,7 @@ public class Intake extends SubsystemBase{
     private int numBalls;
     private boolean ballSeen;
 
-    
     DigitalInput carriageSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_SWITCH);
-    AnalogPotentiometer ultrasonicT = new AnalogPotentiometer(0, 1000, 0);
-    AnalogPotentiometer ultrasonicB = new AnalogPotentiometer(1, 1000, 0);
 
     public Intake(){
       numBalls = 0;
@@ -62,7 +60,7 @@ public class Intake extends SubsystemBase{
         carriageTop.set(ControlMode.PercentOutput, 0);
       } 
       else {
-        carriageTop.set(ControlMode.PercentOutput, -speed);
+        carriageTop.set(ControlMode.PercentOutput, speed);
         carriageBottom.set(ControlMode.PercentOutput, speed);
       }
       intakeMotor.set(speed);
@@ -70,8 +68,9 @@ public class Intake extends SubsystemBase{
     
     public void shootIntake(final double speed){
       carriageBottom.set(ControlMode.PercentOutput, speed);
-      carriageTop.set(ControlMode.PercentOutput, -speed);
-      carriageShooter.set(ControlMode.PercentOutput, speed);
+      carriageTop.set(ControlMode.PercentOutput, speed);
+      carriageLeftShooter.set(speed);
+      carriageRightShooter.set(-speed);
       intakeMotor.set(0);
     }
   
@@ -79,7 +78,8 @@ public class Intake extends SubsystemBase{
       intakeMotor.set(0);
       carriageBottom.set(ControlMode.PercentOutput, 0);
       carriageTop.set(ControlMode.PercentOutput, 0);
-      carriageShooter.set(ControlMode.PercentOutput, 0);
+      carriageLeftShooter.set(0);
+      carriageRightShooter.set(0);
     }
   
     public void IntakeUp(){
