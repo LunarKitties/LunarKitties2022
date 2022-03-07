@@ -31,6 +31,8 @@ import frc.robot.commands.ChangeOveride;
 import frc.robot.commands.CarriageDown;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.IntakeDown;
+import frc.robot.commands.ClampMid;
+import frc.robot.commands.UnclampMid;
 import frc.robot.commands.TestWheel;
 import frc.robot.commands.auto.Auto;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -51,13 +53,6 @@ public class RobotContainer {
   private final Intake mIntake = new Intake();
   private final WheelOfFortune mWheel = new WheelOfFortune();
   
-  
-  // private final DriveAuto step1 = new DriveAuto(mDrivetrain, 0.5);
-  // private final DriveAuto step2 = new DriveAuto(mDrivetrain, 0);
-  // private final DriveAuto step3 = new DriveAuto(mDrivetrain, -0.5);
-
-
- // private SequentialCommandGroup autoStart2 = new SequentialCommandGroup(new CarriageUpAuto(mCarriage), new DriveAuto(mDrivetrain, -0.5));
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
 
@@ -66,9 +61,10 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    /*
     mDrivetrain.gyroCalibrate();
     mDrivetrain.gyroReset();
-
+*/
     mDrivetrain.setDefaultCommand(
       new DriveWithController(
         mDrivetrain, 
@@ -91,6 +87,7 @@ public class RobotContainer {
         () -> xbox2.getRightTriggerAxis()
       )
     );
+    
     
 
     mWheel.setDefaultCommand(
@@ -121,11 +118,16 @@ public class RobotContainer {
 
     //new JoystickButton(xbox2, Button.kX.value).whenPressed(new StopWheel(mWheel));
 
-    new JoystickButton(xbox2, Button.kB.value).whenPressed(new IntakeUp(mIntake));
-    new JoystickButton(xbox2, Button.kX.value).whenPressed(new IntakeDown(mIntake));
+    new JoystickButton(xbox1, Button.kB.value).whenPressed(new IntakeUp(mIntake, mWheel));
+    new JoystickButton(xbox1, Button.kX.value).whenPressed(new IntakeDown(mIntake));
 
     new JoystickButton(xbox2, Button.kY.value).whenPressed(new CarriageUp(mIntake));
     new JoystickButton(xbox2, Button.kA.value).whenPressed(new CarriageDown(mIntake));
+
+    
+    new JoystickButton(xbox2, Button.kB.value).whenPressed(new ClampMid(mWheel));
+    new JoystickButton(xbox2, Button.kX.value).whenPressed(new UnclampMid(mWheel));
+    
   }
 
   /**

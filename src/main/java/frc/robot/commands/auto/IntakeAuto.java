@@ -9,6 +9,7 @@ public class IntakeAuto extends CommandBase{
 
     private final Intake mIntake;
     private final double speed;
+    private final Timer time = new Timer();
 
     public IntakeAuto(Intake subsystem, double s)
     {
@@ -19,6 +20,7 @@ public class IntakeAuto extends CommandBase{
 
     public void initialize()
     {
+        time.start();
     }
 
     public void execute()
@@ -28,7 +30,7 @@ public class IntakeAuto extends CommandBase{
 
     public boolean isFinished()
     {
-        if(mIntake.colorSeesRed() || mIntake.colorSeesBlue())
+        if(time.get() > 1.75)
         {
             mIntake.stop();
             return true;

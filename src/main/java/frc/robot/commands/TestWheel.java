@@ -36,13 +36,15 @@ public class TestWheel extends CommandBase {
 
     @Override
     public  void execute(){
+        if(mWheel.active == true)
+        {
         if(mLeftStickY.getAsDouble() > 0.1 || mLeftStickY.getAsDouble() < -0.1){
-        mWheel.spinWheel(-mLeftStickY.getAsDouble());
+            mWheel.spinWheel(-mLeftStickY.getAsDouble());
         }
         else{
             mWheel.spinWheel(0);
         }
-        /*
+    
         if( mrBumper.getAsBoolean() ){
             mWheel.deployArms();
         }else if (mlBumper.getAsBoolean()){
@@ -50,16 +52,7 @@ public class TestWheel extends CommandBase {
         }else{
             mWheel.stopArms();
         }
-*/
-/*
-        if( ma.getAsBoolean() ){
-            mWheel.closeHooks();;
-        }else if (mb.getAsBoolean()){
-            mWheel.openHooks();
-        }else{
-            mWheel.stopHooks();
-        }
-        */
+    }
     }
 }
 

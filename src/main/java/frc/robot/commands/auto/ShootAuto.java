@@ -30,7 +30,7 @@ public class ShootAuto extends CommandBase{
 
     public boolean isFinished()
     {
-        if(time.get() > 1)
+        if(time.get() > 2)
         {
             mIntake.shootIntake(0);
             return true;

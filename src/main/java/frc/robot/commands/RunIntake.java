@@ -35,9 +35,9 @@ public class RunIntake extends CommandBase {
         
         if(mIntake.carriageTop()){
             if(mrTrig2.getAsDouble() > mlTrig2.getAsDouble()){
-                mIntake.shootIntake(posSpeed2);
+                mIntake.shootIntake(posSpeed2 * 0.9);
             }else{
-                mIntake.shootIntake(negSpeed2);
+                mIntake.shootIntake(negSpeed2 * 0.9);
             }
         }else{ 
             if(mrTrig1.getAsDouble() > mlTrig1.getAsDouble()){

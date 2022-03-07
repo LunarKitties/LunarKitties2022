@@ -16,7 +16,7 @@ public class IntakeDown extends CommandBase {
 
     @Override
     public void initialize(){
-        mIntake.IntakeDown();
+        mIntake.IntakeUp();
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
 

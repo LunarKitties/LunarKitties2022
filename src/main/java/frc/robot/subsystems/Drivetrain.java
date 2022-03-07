@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.kauailabs.navx.frc.AHRS;
+//import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -39,13 +39,14 @@ public class Drivetrain extends SubsystemBase{
     RelativeEncoder leftEncoders = lfMotor.getEncoder();
     RelativeEncoder rightEncoders = rfMotor.getEncoder();
 
-    AHRS gyro = new AHRS();
+    //AHRS gyro = new AHRS();
 
         //Create Differential Drive Object allowing us to drive the robot
     DifferentialDrive dd = new DifferentialDrive(leftWheels, rightWheels);
 
-      //Wheel Shifters
-    DoubleSolenoid shifters = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_DRIVE_S_OUT, Constants.PH_DRIVE_S_IN);
+      //Wheel Shifters 
+      DoubleSolenoid shifters = new DoubleSolenoid(15, PneumaticsModuleType.REVPH, Constants.PH_DRIVE_S_OUT, Constants.PH_DRIVE_S_IN);
+   
 
         //constructor
     public Drivetrain(){
@@ -80,7 +81,7 @@ public class Drivetrain extends SubsystemBase{
 
     public void arDrive(double speed, double rotate){
         leftWheels.setInverted(true);
-        dd.arcadeDrive(speed ,rotate*0.7);
+        dd.arcadeDrive(speed ,rotate);
     }
 
     public void tDrive(double left, double right)
@@ -139,6 +140,7 @@ public class Drivetrain extends SubsystemBase{
         rightEncoders.setPosition(0);
     }
 
+    /*
     public void gyroCalibrate(){
         gyro.calibrate();
     }  
@@ -150,12 +152,12 @@ public class Drivetrain extends SubsystemBase{
     public double getAngle(){
         return gyro.getAngle() % 360;
     }
-
+*/
     public void publish(){
         SmartDashboard.putNumber("leftEncoders", getLeftEncoders());
         SmartDashboard.putNumber("rightEncoders", getRightEncoders());
         SmartDashboard.putBoolean("manualOveride", manualOveride);
         SmartDashboard.putNumber("wheelVelocity", wheelVelocity());
-        SmartDashboard.putNumber("ANGELSinTheOutfield", getAngle());
+       // SmartDashboard.putNumber("ANGELSinTheOutfield", getAngle());
     }
 }
