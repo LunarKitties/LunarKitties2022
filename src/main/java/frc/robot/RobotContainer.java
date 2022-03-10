@@ -18,6 +18,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.WheelOfFortune;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.LEDs;
 
 //commands
 //import frc.robot.commands.ExampleCommand;
@@ -25,15 +26,20 @@ import frc.robot.commands.DriveWithController;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.WheelsShiftHigh;
 import frc.robot.commands.WheelsShiftLow;
-import frc.robot.commands.auto.DriveAuto;
+import frc.robot.commands.StartClimbing;
+import frc.robot.commands.RetractArms;
 import frc.robot.commands.CarriageUp;
 import frc.robot.commands.ChangeOveride;
 import frc.robot.commands.CarriageDown;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.RetractArms;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.ClampMid;
+import frc.robot.commands.ClampHigh;
 import frc.robot.commands.UnclampMid;
 import frc.robot.commands.TestWheel;
+import frc.robot.commands.UnclampHigh;
+import frc.robot.commands.auto.autoClamping;
 import frc.robot.commands.auto.Auto;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -52,6 +58,7 @@ public class RobotContainer {
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
   private final WheelOfFortune mWheel = new WheelOfFortune();
+  private final LEDs mLEDs = new LEDs();
   
   public XboxController xbox1 = new XboxController(0);
   public XboxController xbox2 = new XboxController(1);
@@ -72,15 +79,12 @@ public class RobotContainer {
         () -> xbox1.getRightTriggerAxis(),  
         () -> xbox1.getRightX(),
         () -> xbox1.getLeftY(),
-        () -> xbox1.getRightY(),
-        mDrivetrain.getConfig(),
-        mDrivetrain.getMode()
-      )
+        () -> xbox1.getRightY())
     );
 
     mIntake.setDefaultCommand(
       new RunIntake(
-        mIntake,
+        mIntake, mLEDs,
         () -> xbox1.getLeftTriggerAxis(),
         () -> xbox1.getRightTriggerAxis(),
         () -> xbox2.getLeftTriggerAxis(),
@@ -88,8 +92,6 @@ public class RobotContainer {
       )
     );
     
-    
-
     mWheel.setDefaultCommand(
       new TestWheel(
         mWheel, 
@@ -114,7 +116,7 @@ public class RobotContainer {
     
     new JoystickButton(xbox1, Button.kRightBumper.value).whenPressed(new WheelsShiftHigh(mDrivetrain));
     new JoystickButton(xbox1, Button.kLeftBumper.value).whenPressed(new WheelsShiftLow(mDrivetrain));
-    new JoystickButton(xbox2, Button.kLeftBumper.value).whenPressed(new ChangeOveride(mDrivetrain));
+    new JoystickButton(xbox1, Button.kY.value).whenPressed(new ChangeOveride(mDrivetrain, mLEDs));
 
     //new JoystickButton(xbox2, Button.kX.value).whenPressed(new StopWheel(mWheel));
 
@@ -125,8 +127,10 @@ public class RobotContainer {
     new JoystickButton(xbox2, Button.kA.value).whenPressed(new CarriageDown(mIntake));
 
     
-    new JoystickButton(xbox2, Button.kB.value).whenPressed(new ClampMid(mWheel));
-    new JoystickButton(xbox2, Button.kX.value).whenPressed(new UnclampMid(mWheel));
+    new JoystickButton(xbox2, Button.kRightBumper.value).whenPressed(new UnclampMid(mWheel));
+    new JoystickButton(xbox2, Button.kLeftBumper.value).whenPressed(new UnclampHigh(mWheel));
+    new JoystickButton(xbox2, Button.kB.value).whenPressed(new StartClimbing(mWheel));
+    new JoystickButton(xbox2, Button.kX.value).whenPressed(new RetractArms(mWheel));
     
   }
 

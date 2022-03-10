@@ -30,7 +30,7 @@ public class IntakeAuto extends CommandBase{
 
     public boolean isFinished()
     {
-        if(time.get() > 1.75)
+        if(time.get() > 2)
         {
             mIntake.stop();
             return true;

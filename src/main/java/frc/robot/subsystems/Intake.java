@@ -39,25 +39,24 @@ public class Intake extends SubsystemBase{
     //ball detection
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-    private int numBalls;
+    public int numBalls;
     private boolean ballSeen;
+    public boolean highGoal;
 
     DigitalInput carriageSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_SWITCH);
 
     public Intake(){
       numBalls = 0;
       ballSeen = false;
+      highGoal = false;
     }
       
     public void runIntake(final double speed){
       countBalls(speed);
-      if (numBalls == 1){
+      if (numBalls > 1){
         carriageTop.set(ControlMode.PercentOutput, 0);
         carriageBottom.set(ControlMode.PercentOutput, speed);
-      } 
-      else if (numBalls == 2){
-        carriageBottom.set(ControlMode.PercentOutput, 0);
-        carriageTop.set(ControlMode.PercentOutput, 0);
+
       } 
       else {
         carriageTop.set(ControlMode.PercentOutput, speed);
@@ -69,9 +68,17 @@ public class Intake extends SubsystemBase{
     public void shootIntake(final double speed){
       carriageBottom.set(ControlMode.PercentOutput, speed);
       carriageTop.set(ControlMode.PercentOutput, speed);
-      carriageLeftShooter.set(speed);
-      carriageRightShooter.set(-speed);
+      carriageLeftShooter.set(speed*.3);
+      carriageRightShooter.set(-speed*.3);
       intakeMotor.set(0);
+    }
+
+    public void shootHigh(double speed)
+    {
+      carriageBottom.set(ControlMode.PercentOutput, speed);
+      carriageTop.set(ControlMode.PercentOutput, speed);
+      carriageLeftShooter.set(-1);
+      carriageRightShooter.set(1);
     }
   
     public void stop(){

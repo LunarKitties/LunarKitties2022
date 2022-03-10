@@ -1,33 +1,38 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.WheelOfFortune;
 //import frc.robot.subsystems.LEDs;
+import frc.robot.subsystems.WheelOfFortune;
 
-public class IntakeUp extends CommandBase {
-    private final Intake mIntake;
+public class RetractArms extends CommandBase {
+    private final WheelOfFortune mIntake;
     //private final LEDs mLEDs;
 
-    public IntakeUp(Intake _Intake, WheelOfFortune wheelOfFortune){
+    public RetractArms(WheelOfFortune _Intake){
         mIntake = _Intake;
         //mLEDs = _LEDs;
         addRequirements(mIntake);
     }
 
+    public void initialize()
+    {
+        mIntake.activate();
+    }
     @Override
-    public void initialize(){
-        mIntake.IntakeDown();
+    public void execute(){
+        mIntake.stopArms();
         //mLEDs.setColor(mLEDs.RAINBOW);
     }
 
     @Override
     public boolean isFinished(){
-        return true;
+       
+            return true;
     }
 
-    public void end()
-    {
+
+    public void end(){
         
     }
 }

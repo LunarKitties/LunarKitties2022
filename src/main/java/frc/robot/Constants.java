@@ -47,20 +47,25 @@ public final class Constants {
     public static final int PH_CARRIAGE_DOWN = 1;
     public static final int PH_MARM_HOOK_CLAMP = 7;
     public static final int PH_MARM_HOOK_UNCLAMP = 8;
+    public static final int PH_HARM_HOOK_CLAMP = 0;
+    public static final int PH_HARM_HOOK_UNCLAMP = 1;
 
     //digital imput ports
     public static final int CARRIAGE_LIFT_SWITCH = 0;
-    public static int HARM_LEFT_CLAMP = 1;
-    public static int HARM_RIGHT_CLAMP = 2;
+    public static int HARM_LEFT_CLAMP = 4;
+    public static int HARM_RIGHT_CLAMP = 1;
     public static int MARM_LEFT_CLAMP = 3;
-    public static int MARM_RIGHT_CLAMP = 4;
+    public static int MARM_RIGHT_CLAMP = 6;
     public static int TARM_LEFT_CLAMP = 5;
-    public static int TARM_RIGHT_CLAMP = 6;
-    public static int HANGARARM_LEFT_SWITCH = 7;
+    public static int TARM_RIGHT_CLAMP = 7;
+    public static int HANGARARM_LEFT_SWITCH = 2;
     public static int HANGARARM_RIGHT_SWITCH = 8;
 
     //analog input ports
     public static final int ULTRASONIC_TOP = 0;
     public static final int ULTRASONIC_BOT = 1;
+
+    //pwm
+    public static final int PWM_BLINKIN = 0;
 }
 

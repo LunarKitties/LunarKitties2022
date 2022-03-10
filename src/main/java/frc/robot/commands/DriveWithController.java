@@ -14,18 +14,14 @@ public class DriveWithController extends CommandBase{
     private final DoubleSupplier mRightStickX;
     private final DoubleSupplier mLeftStickY;
     private final DoubleSupplier mRightStickY;
-    private boolean manualOveride;
-    private int mConfig;
 
-    public DriveWithController( Drivetrain subsystem, DoubleSupplier leftTrigger, DoubleSupplier rightTrigger, DoubleSupplier rightStickX, DoubleSupplier leftStickY, DoubleSupplier rightStickY, int config, boolean MmanualOveride){
+    public DriveWithController( Drivetrain subsystem, DoubleSupplier leftTrigger, DoubleSupplier rightTrigger, DoubleSupplier rightStickX, DoubleSupplier leftStickY, DoubleSupplier rightStickY){
         mDrivetrain = subsystem;
         mLeftTrigger = leftTrigger;
         mRightTrigger = rightTrigger;
         mRightStickX = rightStickX;
         mLeftStickY = leftStickY;
         mRightStickY = rightStickY;
-        mConfig = config;
-        manualOveride = MmanualOveride;
         addRequirements(mDrivetrain);
     }
 
@@ -37,32 +33,24 @@ public class DriveWithController extends CommandBase{
         double left = mLeftStickY.getAsDouble();
         double right = mRightStickY.getAsDouble();
 
-        //To Rotate you use the Right Joystick X Axis
+        //To Rotate you use the Right Joystick X Axis 
         double rotate = mRightStickX.getAsDouble();
 
         //Drive the Robot
 
-            if(mConfig == 1)
-            {
-                mDrivetrain.arDrive(speed, rotate);
-            }
-            else if(mConfig == 2)
-            {
-                mDrivetrain.arDrive(-left, rotate*0.7);
-            }
-            else{
-                mDrivetrain.tDrive(-left, -right);
-            }
+                mDrivetrain.arDrive(-left* 0.7, rotate*0.5);
 
-          
-            if(!mDrivetrain.getMode() && Math.abs(mDrivetrain.wheelVelocity()) > 1400 && mDrivetrain.isHighGear()){
+        if(!mDrivetrain.getMode()){
+            if(Math.abs(mDrivetrain.wheelVelocity()) > 1400 && mDrivetrain.isHighGear()){
                 mDrivetrain.shiftLow();
             }
-            else if(!mDrivetrain.getMode() && Math.abs(mDrivetrain.wheelVelocity()) < 200 && mDrivetrain.isLowGear()){
+            else if(Math.abs(mDrivetrain.wheelVelocity()) < 200 && mDrivetrain.isLowGear()){
                 mDrivetrain.shiftHigh();
             }
+        }
+        else{
 
-            mDrivetrain.publish();
+        }
     }
-    
-}
+           // mDrivetrain.publish();
+    }

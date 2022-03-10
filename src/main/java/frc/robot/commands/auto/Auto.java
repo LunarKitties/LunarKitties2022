@@ -34,14 +34,14 @@ public class Auto extends SequentialCommandGroup
         addCommands(
             new IntakeDown(mIntake),
             new ParallelCommandGroup(
-                new DriveAuto(mDrivetrain, 0.4, 18),
+                new DriveAuto(mDrivetrain, 0.3, 19),
                 new IntakeAuto(mIntake, 1.0)),
             new wait(mDrivetrain, mIntake, 0.5),
-            new DriveAuto(mDrivetrain, -0.5, 20),
+            new DriveAuto(mDrivetrain, -0.3, 21),
             new CarriageUpAuto(mIntake),
             new ShootAuto(mIntake, 1.0),
             new CarriageDownAuto(mIntake),
-            new DriveAuto(mDrivetrain, 0.5, 45)  
+            new DriveAuto(mDrivetrain, 0.5, 35)  
             
         );
     }
